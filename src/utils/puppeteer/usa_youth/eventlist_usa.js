@@ -31,6 +31,7 @@ return eventListAll
 }
 
 
+// NEED to set up SUPABASE CLEINT AGAIN TO RUN UPSERT****** 
 
 // async function upsertEvents() { 
 
