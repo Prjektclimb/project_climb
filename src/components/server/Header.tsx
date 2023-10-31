@@ -7,7 +7,7 @@ import Link from "next/link";
 import UserName from "~/components/client/UserName";
 
 export default async function Header() {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const supabase = createServerComponentClient({ cookies });
 	const {
 	  data: { session },
 	} = await supabase.auth.getSession();
