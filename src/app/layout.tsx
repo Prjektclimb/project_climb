@@ -1,6 +1,6 @@
 
 import { LayoutProvider } from "~/useContext/layoutContext";
-import HeroLanding from "~/components/client/HeroLanding";
+
 
 
 export const metadata = {

@@ -9,7 +9,7 @@ export interface EventsType {
   resultsURL: string
 }
 
-export default function EventList(data: any) {
+export default function EventList(data: EventsType) {
   const [events, setEvents] = useState<EventsType[]>([data]);
 
 

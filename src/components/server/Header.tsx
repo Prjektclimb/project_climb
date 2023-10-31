@@ -1,8 +1,6 @@
 
 import {createServerComponentClient} from "@supabase/auth-helpers-nextjs"; 
 import {cookies} from "next/headers"
-import { Button } from "@/components/ui/button";
-
 import Link from "next/link";
 import UserName from "~/components/client/UserName";
 

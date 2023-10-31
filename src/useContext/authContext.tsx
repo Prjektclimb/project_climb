@@ -2,16 +2,13 @@
 
 import {
   createContext,
-  useReducer,
   useState,
   useEffect,
   ReactNode,
   FC,
 } from "react";
-import { authReducer } from "~/useReducers/authReducer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { SignIn } from "@supabase/auth-ui-react";
 
 type AuthProviderProps = {
   children: ReactNode;

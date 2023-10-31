@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
+// import { NextResponse } from "next/server"
 
 
-export  async function GET(request: Request) {
+// export  async function GET(request: Request) {
 
-	/// Set up Cookies 
+// 	/// Set up Cookies 
 
-	  return NextResponse.json({message: "hello"})
+// 	  return NextResponse.json({message: "hello"})
 
-} 
+// } 
