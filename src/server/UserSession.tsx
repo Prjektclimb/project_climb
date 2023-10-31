@@ -6,7 +6,7 @@ export default async function Session() {
 	const supabase = createServerComponentClient({ cookies});
 	const {data: {session}} = await supabase.auth.getSession()
  
-console.log(session)
+console.log('session', session)
 
 return { 
 	props: { 

@@ -1,3 +1,6 @@
+'use client'
+
+
 import { createContext, useReducer, useState, useEffect, ReactNode, FC} from "react";
 import { authReducer} from "~/useReducers/authReducer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -75,7 +78,7 @@ export const AuthProvider: FC <AuthProviderProps> = ({ children }) => {
   const signOut =async () => {
     const {error} = await supabaseClient.auth.signOut()
     if (error) console.log('Error with signout', error)
-    else console.log('Signout successful'), router.push("/auth/login")
+    else console.log('Signout successful'), router.push("/auth/login"), setUser(null), console.log('user', user)
 
   }
 
@@ -106,10 +109,6 @@ export const AuthProvider: FC <AuthProviderProps> = ({ children }) => {
 
   // Get User's 
 useEffect(() =>  {
-
-
-  
-
 	const getUser = async () => { 
 
 		const {data: {user}} = await supabaseClient.auth.getUser()
@@ -117,7 +116,7 @@ useEffect(() =>  {
 		console.log(user)
 	}
 	getUser()
-}, [signOut, SignIn])
+}, [])
 
 
 

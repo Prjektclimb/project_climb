@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import { useContext} from "react";
-import { AuthContext } from "~/useContext/authContext";
-export default function UserName() {
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {createClientComponentClient} from "@supabase/auth-helpers-nextjs"
+import Link from "next/link";
 
-const auth = useContext(AuthContext)
-
-
-
-
+export default function UserName({ session }) {
   return (
-	<>
-    <p>
-      { auth?.user ? `Hello,` : null}
-    </p>
-
-	</>
+    <>
+      {session ? (
+        <p>Hellop</p>
+      ) : (
+        <Button>
+          <Link href="/auth/login">Signin</Link>
+        </Button>
+      )}
+    </>
   );
 }

@@ -54,6 +54,10 @@ See .env.example for layout
 Set up .env.local with same layout - this will overrule .env for local enviroment 
 
 
+## Test User 
+
+email: test@gmail.com
+password: test
 
 ### Supabase 
 Local Set up 
