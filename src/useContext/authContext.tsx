@@ -67,6 +67,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
       console.log("data", data);
       router.push("/");
+      router.refresh(); 
       if (error) throw error;
     } catch (error) {
       console.log("Error Signing In", error);
@@ -86,6 +87,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         console.log("Signout successful");
         setUser(null);
         router.push("/auth/login");
+        router.refresh();
         console.log("User", user);
       }
     } catch (error) {

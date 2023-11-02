@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 
-export default function UserName({ session }) {
+
+export default function UserName({ session, user }) {
+
 
 const auth = useContext(AuthContext)
 

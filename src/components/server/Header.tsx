@@ -10,12 +10,14 @@ export default async function Header() {
 	  data: { session },
 	} = await supabase.auth.getSession();
 
+const { data: { user } } = await supabase.auth.getUser()
+
 
 
   return (
     <header className="flex flex-row justify-between p-2 px-10">
       <p className="font-bold">LOGO</p>
-      <UserName session={session} />
+      <UserName session={session} user={user}/>
       <nav className="flex flex-row">
         <ul className="flex flex-row">
           <li>
