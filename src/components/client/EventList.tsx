@@ -4,24 +4,29 @@ import React, { useEffect, useState } from "react";
 
 
 export interface EventsType { 
-  id: number,
-  event: string,
-  resultsURL: string
+  id?: number,
+  event?: string,
+  resultsURL?: string
+}
+interface EventListProps {
+  data: EventsType | null
 }
 
-export default function EventList(data: EventsType) {
-  const [events, setEvents] = useState<EventsType[]>([data]);
-
-
+export const EventList: React.FC<EventListProps> = ({ data }) => {
+  if (!data) {
+    return (
+      <div>
+        <p>No event data available</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <p>Hello World</p>
       <ul>
-        {events.map((event: EventsType, index: number) => (
-          <li key={index}>{event.resultsURL}</li>
-        ))}
+        <li key={data.id}>{data.resultsURL}</li>
       </ul>
     </>
   );
-}
+};

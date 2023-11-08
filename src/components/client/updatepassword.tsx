@@ -2,7 +2,6 @@
 
 import React, { useState, useContext } from "react";
 import Link from "next/link";
-import Header from "~/components/client/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 

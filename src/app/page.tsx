@@ -1,6 +1,6 @@
 
 
-import EventList from "~/components/client/EventList";
+import {EventList}  from "~/components/client/EventList";
 import { supabaseclient } from "supabaseClient";
 
 
@@ -18,7 +18,7 @@ const { data, error } = await supabaseclient
       <div>
         <p className="bg-red-500">Hi</p>
         </div>
-     <EventList data={data}/> 
+     {/* <EventList data={data}/>  */}
     </>
   );
 }

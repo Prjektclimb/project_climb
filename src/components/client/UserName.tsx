@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect, useContext} from "react";
+import {  useContext} from "react";
 import { AuthContext } from "~/useContext/authContext";
 import { Button } from "@/components/ui/button";
-import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
+// import { sessionType } from "~/types/authTypes";
 import Link from "next/link";
 
 
-export default function UserName({ session, user }) {
+
+
+export default function UserName() {
 
 
 const auth = useContext(AuthContext)
@@ -16,10 +18,10 @@ const auth = useContext(AuthContext)
 
   return (
     <>
-      {session ? (
+      {auth?.user != null ? (
         <>
         <p>Hello</p>
-        <Button onClick={() => auth.signOut()}>Sign out</Button>
+        <Button onClick={() => auth?.signOut()}>Sign out</Button>
         </>
       ) : (
         <Button>

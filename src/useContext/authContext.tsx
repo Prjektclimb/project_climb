@@ -9,6 +9,7 @@ import {
 } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { log } from "console";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -65,7 +66,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         email: email,
         password: password,
       });
-      console.log("data", data);
+      console.log("Signin in...", data);
+      setUser(data)
       router.push("/");
       router.refresh(); 
       if (error) throw error;
@@ -118,17 +120,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // Get User's
-  useEffect(() => {
-    const getUser = async () => {
-      const {
-        data: { user },
-      } = await supabaseClient.auth.getUser();
-      setUser(user);
-      console.log(user);
-    };
-    getUser();
-  }, []);
 
   return (
     <AuthContext.Provider
