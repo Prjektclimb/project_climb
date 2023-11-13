@@ -1,23 +1,10 @@
 
-import {createServerComponentClient} from "@supabase/auth-helpers-nextjs"; 
-import {cookies} from "next/headers"
+
 import Link from "next/link";
 import UserName from "~/components/client/UserName";
 
-export const revalidate = 0
-
-
 
 export default async function Header() {
-  
-	// const supabase = createServerComponentClient({ cookies });
-	// const {
-	//   data: { session },
-	// } = await supabase.auth.getSession();
-
-
-
-
 
   return (
     <header className="flex flex-row justify-between p-2 px-10">
@@ -33,6 +20,9 @@ export default async function Header() {
           </li>
           <li>
             <Link href="/contact">Events</Link>
+          </li>
+          <li>
+            <Link href='/preferences'>Settings</Link>
           </li>
         </ul>
       </nav>

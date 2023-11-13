@@ -7,7 +7,7 @@ import { AuthContext } from "~/useContext/authContext";
 
 
 
-export  function Resetpassword() {
+export default function Resetpassword() {
   const auth = useContext(AuthContext);
   const [formData, setFormData] = useState({
   email: ""

@@ -9,7 +9,7 @@ import {
 } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { log } from "console";
+
 
 type AuthProviderProps = {
   children: ReactNode;
