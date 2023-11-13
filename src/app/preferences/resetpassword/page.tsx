@@ -1,6 +1,6 @@
-import Resetpassword  from "~/components/client/resetpassword"
+import { Resetpassword }   from "~/components/client/resetpassword"
 
-export default function resetpassword() {
+export default function resetpasswordpage() {
   return (
 	<div>
 	<Resetpassword />

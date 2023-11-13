@@ -11,9 +11,7 @@ import Link from "next/link";
 
 export default function UserName() {
 
-
 const auth = useContext(AuthContext)
-
 
 
   return (
