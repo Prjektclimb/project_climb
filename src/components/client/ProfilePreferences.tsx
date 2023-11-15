@@ -36,7 +36,7 @@ export function ProfilePreferences() {
   return (
     <form
       onSubmit={handleSubmit}
-      className='self-auto'
+      className='flex flex-col items-center justify-center h-screen'
     >
       <div className="mb-4">
         <label htmlFor="firstName" className="block text-sm font-medium text-gray-600">
