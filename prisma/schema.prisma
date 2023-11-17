@@ -46,6 +46,7 @@ model User {
   premiumAccount Boolean
   userName       String?   @unique
   id             Int       @id @default(autoincrement())
+  example        String?
   accounts       Account[]
   sessions       Session[]
 }

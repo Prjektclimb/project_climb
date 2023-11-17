@@ -157,9 +157,11 @@ const runScapeForStates = async () => {
         const address = document.querySelector(
           "#climbing-gyms > div:nth-child(2) > div.col-md-8.col-lg-9 > div.gym-overview > div.gym-info > div:nth-child(4) > a",
         )
+        const state = document.querySelector("#climbing-gyms > div.row.pt-main-content > div > div > a:nth-child(2)")
 
         return {
           gym: gym?.innerText,
+          state: state?.innerText, 
           number: mainNumber?.innerText,
           address: address?.innerText,
           website: website?.innerText,

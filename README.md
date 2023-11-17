@@ -41,6 +41,7 @@ List any prerequisites that users need to have installed before they can run you
 ### Prisma 
 [https://www.prisma.io/docs/reference/api-reference/command-reference]
 
+**Best to update scheme via supabase to advoid data lost** 
 
 1. npx prisma [command]
   1. db **manage DB scheme by using push**
