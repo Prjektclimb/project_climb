@@ -1,11 +1,13 @@
 
 import puppeteer from "puppeteer";
 import 'dotenv/config'
+import { createClient } from '@supabase/supabase-js'
 
+const DATABASE_SUPABASE_URL='https://zaedmhdsfypksviqybsm.supabase.co' 
+const DATABASE_SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZWRtaGRzZnlwa3N2aXF5YnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ0Nzg5MDEsImV4cCI6MjAxMDA1NDkwMX0.p_vcRgkhMjxR5F_00YW_MZ13PoCvTdJywAZ2nySAzTU'
 
+export const supabaseclient = createClient(DATABASE_SUPABASE_URL, DATABASE_SUPABASE_ANON_KEY)
 
-
-// const supabase = createClient()
 
 //WebScrapping for EventList, to be export into clusters.js to run mutiple clusters
 export const scrapeEvents = async () => {

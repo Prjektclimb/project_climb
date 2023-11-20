@@ -60,14 +60,20 @@ model VerificationToken {
 }
 
 model Gym {
-  gymName   String   @unique
-  email     String
-  address   String?
-  image     String?
-  events    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  id        Int      @id @default(autoincrement())
+  gym            String    @unique(map: "Gym_gymName_key")
+  email          String?
+  address        String?
+  image          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
+  id             Int       @id @default(autoincrement())
+  website        String?
+  state          String?
+  phone_number   String?
+  street_address String?
+  suite          String?
+  zip_code       String?
+  city           String?
 }
 
 model USAClimbingEvents {
