@@ -1,3 +1,9 @@
+import { ProfilePreferences} from "~/components/client/ProfilePreferences"
+
 export default function preference() { 
-	return <p>User Page</p>
+	return (
+	<div>
+		<ProfilePreferences /> 
+	</div>
+	)
 }

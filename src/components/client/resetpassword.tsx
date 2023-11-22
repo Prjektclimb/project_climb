@@ -27,7 +27,7 @@ export  function Resetpassword() {
 
   return (
     <>
-      <div className="mt-10 flex justify-center">
+      <div className="flex justify-center items-center  h-screen">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Send pasword reset</h1>
           <form onSubmit={handleSubmit}>
