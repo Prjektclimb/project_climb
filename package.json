@@ -36,6 +36,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.279.0",
     "next": "^13.4.13",
     "next-auth": "^4.22.4",
@@ -43,6 +44,7 @@
     "puppeteer-cluster": "^0.23.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-leaflet": "^4.2.1",
     "superjson": "^1.13.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
+    "@types/leaflet": "^1.9.8",
     "@types/node": "^18.17.17",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
