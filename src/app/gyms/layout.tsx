@@ -1,6 +1,9 @@
 import StateList from "~/components/client/stateList"
 import GymMap from "~/components/client/GymMap";
 
+
+
+
 export default function GymsLayout({
 	children, 
   }: {
@@ -19,7 +22,6 @@ export default function GymsLayout({
 		  <div className=" flex justify-center mb-24">
 		<GymMap /> 
 		</div>
-		
 		</div>
 	  );
 	  
