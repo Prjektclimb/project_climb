@@ -2,8 +2,8 @@
 
 import { supabaseclient } from "supabaseClient";
 import { fetchGymsByColumn } from "~/app/api/supabase";
-import GymsByState from "~/components/client/GymsByState";
-import GymsInformation from "~/components/client/GymsInformation";
+import GymsByState from "~/components/client/GymComponents/GymsByState";
+import GymsInformation from "~/components/client/GymComponents/GymsInformation";
 
 
 

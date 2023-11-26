@@ -1,5 +1,5 @@
-import StateList from "~/components/client/stateList"
-import GymMap from "~/components/client/GymMap";
+import StateList from "~/components/client/GymComponents/stateList"
+import GymMap from "~/components/client/GymComponents/GymMap";
 
 
 

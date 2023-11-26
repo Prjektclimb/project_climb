@@ -1,4 +1,4 @@
-import { Login } from "~/components/client/login";
+import { Login } from "~/components/client/AuthComponenets/login";
 
 
 import React from 'react'

@@ -6,6 +6,7 @@ import { fetchGymsByColumn } from "~/app/api/supabase";
 import { GymTypeArray} from "~/types/supabasetypes";
 import { useParams } from "next/navigation";
 import GymsInformation from "./GymsInformation";
+import GymInfoPlaceHolder from "./GymInfoPlaceHolder";
 
 export function formatSlug(slug: string | string[] | undefined ): string {
 	if (slug === undefined || slug === null) {
@@ -20,11 +21,6 @@ export function formatSlug(slug: string | string[] | undefined ): string {
   
 	return formattedString;
   }
-
-
-
-
-
 
 
 export default function GymsByState() {
@@ -56,7 +52,7 @@ fetchGymsByColumn("state", formattedSlug).then((slug) => {
         ))}
       </ul>
 	  </ScrollArea>
-	{selectGym && <GymsInformation GYM_NAME={selectGym}/> } 
+	{selectGym ? <GymsInformation GYM_NAME={selectGym}/> : <GymInfoPlaceHolder /> } 
     </div>
   );
 }
