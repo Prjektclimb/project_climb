@@ -1,13 +1,11 @@
 
 
-import { supabaseclient } from "supabaseClient";
-import { fetchGymsByColumn } from "~/app/api/supabase";
 import GymsByState from "~/components/client/GymComponents/GymsByState";
-import GymsInformation from "~/components/client/GymComponents/GymsInformation";
 
 
 
-export function formatSlug(slug: string): string {
+
+function formatSlug(slug: string): string {
     const words = slug.split("-");
     const capitalizedWords = words.map(
       (word) => word.charAt(0).toUpperCase() + word.slice(1),

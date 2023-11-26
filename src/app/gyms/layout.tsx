@@ -20,7 +20,7 @@ export default function GymsLayout({
 			{children}
 		  </div>
 		  <div className=" flex justify-center mb-24">
-		<GymMap /> 
+		{/* <GymMap />  */}
 		</div>
 		</div>
 	  );
