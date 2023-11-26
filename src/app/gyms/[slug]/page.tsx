@@ -26,8 +26,7 @@ export default function statePage({ params }: { params: { slug: string } }) {
     <div className="flex flex-col justify-evenly">
       <p className="text-center">{formatSlug(params.slug)}</p>
       <div className="flex space-x-40">
-		<GymsByState/> 
-		<GymsInformation /> 
+		<GymsByState/>  
       </div>
     </div>
   );

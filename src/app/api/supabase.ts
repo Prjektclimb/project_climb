@@ -2,7 +2,7 @@ import { supabaseclient } from "supabaseClient";
 import { GymTypeArray, GymInfoOrUndefined, GymInfo } from "~/types/supabasetypes";
 
 
-
+////////////////////
 
 export async function fetchGymsByColumn(columnName: string, columnValue: string): Promise<GymTypeArray> {
 	try {
@@ -22,7 +22,7 @@ export async function fetchGymsByColumn(columnName: string, columnValue: string)
 	}
   }
   
-
+///////////////////////
 
 export async function FetchGymsInfoByName(GymName: string): Promise<GymInfoOrUndefined> { 
 try {
@@ -46,3 +46,6 @@ try {
 }
 
   }
+
+
+  ////////////////////

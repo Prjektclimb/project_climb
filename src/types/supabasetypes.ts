@@ -1,5 +1,5 @@
 
-/// FETCH Gym
+/// FETCH Gym //////////////
 export interface GymType {
 	gym?: string;
 	email?: string;
@@ -25,10 +25,16 @@ export interface GymsByStateProps {
 ///////////////////////////////
 
 
-// FETCH GYM INFO 
 
+
+////// FETCH GYM INFO  /////////
 export interface GymInfo { 
 	gym?: string;
 	id?: number;
 	phone_number?: string;
 }
+
+export type GymInfoOrUndefined = GymInfo | undefined;
+
+
+////////////////////////////////////////

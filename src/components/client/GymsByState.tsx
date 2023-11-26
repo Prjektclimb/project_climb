@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { fetchGymsByColumn } from "~/app/api/supabase";
 import { GymTypeArray} from "~/types/supabasetypes";
 import { useParams } from "next/navigation";
-import gymPage from "~/app/gyms/page";
+import GymsInformation from "./GymsInformation";
 
 export function formatSlug(slug: string | string[] | undefined ): string {
 	if (slug === undefined || slug === null) {
@@ -29,29 +29,34 @@ export function formatSlug(slug: string | string[] | undefined ): string {
 
 export default function GymsByState() {
   const [GymData, setGymData] = useState<GymTypeArray>([]);
+  const [selectGym, setSelectGym] = useState<string>(); 
   const params = useParams();
+
+  const handleGymClick = (gymName:string | undefined) => { 
+	setSelectGym(gymName)
+  }
 
   useEffect(() => {
 	const formattedSlug = formatSlug(params?.slug)
 fetchGymsByColumn("state", formattedSlug).then((slug) => {
 	setGymData(slug);
   });
-  }, []);
+  }, [selectGym]);
 
-  console.log(GymData)
 
 
   return (
-    <div>
+    <div className="flex">
       <ScrollArea className="h-[100px] w-[350px] rounded-md border p-4 pb-24">
 	  <ul>
         {Object.values(GymData).map((gym) => (
-          <li key={gym?.id}>
+          <li key={gym?.id} onClick={() => handleGymClick(gym?.gym)}>
             {gym?.gym}
           </li>
         ))}
       </ul>
 	  </ScrollArea>
+	{selectGym && <GymsInformation GYM_NAME={selectGym}/> } 
     </div>
   );
 }

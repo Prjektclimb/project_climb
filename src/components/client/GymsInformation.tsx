@@ -1,30 +1,27 @@
 'use client'
 
 import { FetchGymsInfoByName } from "~/app/api/supabase";
-import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { GymInfoOrUndefined } from "~/types/supabasetypes";
 
 
 
-export default function GymsInformation() {
-const params = useParams();
+export default function GymsInformation({GYM_NAME}: {GYM_NAME: string }) {
 
 const [GymInfo, SetGymInfo] = useState<GymInfoOrUndefined>()
 
 useEffect(() => { 
-	FetchGymsInfoByName("First Avenue Rocks").then((info) => { 
+	FetchGymsInfoByName(GYM_NAME).then((info) => { 
 		SetGymInfo(info)
 	})
 
-}, [])
+}, [GYM_NAME])
 
-console.log(GymInfo)
 
   return (
-	<>
+	<div className="flex flex-col">
 	<p>info {GymInfo?.gym}</p>
 	<p>{GymInfo?.phone_number}</p>
-	</>
+	</div>
   )
 }
