@@ -48,55 +48,55 @@ function parseAddress(address) {
 }
 
 export const states = [
-  "alabama",
-  "alaska",
-  "arizona",
-  "arkansas",
-  "california",
-  "colorado",
-  "connecticut",
-  "delaware",
-  "florida",
-  "georgia",
-  "hawaii",
-  "idaho",
-  "illinois",
-  "indiana",
-  "iowa",
-  "kansas",
-  "kentucky",
-  "louisiana",
-  "maine",
-  "maryland",
-  "massachusetts",
-  "michigan",
-  "minnesota",
-  "mississippi",
-  "missouri",
-  "montana",
-  "nebraska",
-  "nevada",
-  "new-hampshire",
-  "new-jersey",
-  "new-mexico",
-  "new-york",
-  "north-carolina",
-  "north-dakota",
-  "ohio",
-  "oklahoma",
-  "oregon",
-  "pennsylvania",
-  "rhode-island",
-  "south-carolina",
-  "south-dakota",
-  "tennessee",
-  "texas",
-  "utah",
-  "vermont",
-  "virginia",
-  "washington",
-  "west-virginia",
-  "wisconsin",
+  // "alabama",
+  // "alaska",
+  // "arizona",
+  // "arkansas",
+  // "california",
+  // "colorado",
+  // "connecticut",
+  // "delaware",
+  // "florida",
+  // "georgia",
+  // "hawaii",
+  // "idaho",
+  // "illinois",
+  // "indiana",
+  // "iowa",
+  // "kansas",
+  // "kentucky",
+  // "louisiana",
+  // "maine",
+  // "maryland",
+  // "massachusetts",
+  // "michigan",
+  // "minnesota",
+  // "mississippi",
+  // "missouri",
+  // "montana",
+  // "nebraska",
+  // "nevada",
+  // "new-hampshire",
+  // "new-jersey",
+  // "new-mexico",
+  // "new-york",
+  // "north-carolina",
+  // "north-dakota",
+  // "ohio",
+  // "oklahoma",
+  // "oregon",
+  // "pennsylvania",
+  // "rhode-island",
+  // "south-carolina",
+  // "south-dakota",
+  // "tennessee",
+  // "texas",
+  // "utah",
+  // "vermont",
+  // "virginia",
+  // "washington",
+  // "west-virginia",
+  // "wisconsin",
   "wyoming",
 ];
 
@@ -107,6 +107,7 @@ export const scrapeUSAGyms = async (state) => {
   // Launch the browser and open a new blank page
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
+  
 
   await page.waitForNetworkIdle();
 
@@ -129,13 +130,17 @@ export const scrapeUSAGyms = async (state) => {
   });
 
   await browser.close();
-  return gymsData;
+  return gymsData; 
+  // console.log(gymsData)
 };
+
+
+
 
 const runScapeForStates = async () => {
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 10,
+    maxConcurrency: 1,
     monitor: true,
     puppeteerOptions: {
       headless: true,
@@ -179,9 +184,9 @@ const runScapeForStates = async () => {
         };
       });
 
-      if (data.gym !== undefined) {
+
         collectedData.push(data);
-      }
+ 
 
     } catch (error) {
       console.log("Error", error);
@@ -198,8 +203,11 @@ const runScapeForStates = async () => {
   await cluster.idle();
   await cluster.close();
 
-  return collectedData;
+//  console.log(collectedData)
+return collectedData
 };
+
+// runScapeForStates()
 
 const processGymData = async () => {
   const data = await runScapeForStates();
@@ -217,7 +225,7 @@ const processGymData = async () => {
         zip_code: addressParsed?.zip_code,
       };
     });
-   return processData
+console.log(processData)
   } else {
     console.log("No data");
   }
