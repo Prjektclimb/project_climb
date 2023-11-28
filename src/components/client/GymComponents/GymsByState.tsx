@@ -43,7 +43,9 @@ export default function GymsByState() {
       <ScrollArea className="h-[100px] w-[350px] rounded-md border p-4 pb-24">
         <ul>
           {Object.values(GymData).map((gym) => (
-            <li key={gym?.id} onClick={() => handleGymClick(gym?.gym)}>
+            <li key={gym?.id}
+            className={selectGym === gym?.gym ? 'underline text-blue-500' : ''}
+             onClick={() => handleGymClick(gym?.gym)}>
               {gym?.gym}
             </li>
           ))}

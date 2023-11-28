@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polygon } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
+import { statesData, StatesDataInterface } from "~/utils/data/states";
 
 
-const key ="lUmoOojik4381Shv1ScA"
 
 interface Center {
   lat: number;
@@ -18,23 +18,69 @@ interface Center {
 
 export default function GymMap() {
 
-  const [center, useCenter] = useState<Center>({lat: 13.084622, lng: 80.248357 });
+  const apiKey = "lUmoOojik4381Shv1ScA"
+const url = `https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?${apiKey}`
+
+
+  const [center, useCenter] = useState<Center>({lat: 40.63463151377654, lng: -97.89969605983609 });
   const ZOOM_LEVEL = 9
   const mapRef = useRef()
 const position = [51.505, -0.09]
 
 return (
-  <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true} style={{height: 400, width: "50%"}}>
-  <TileLayer
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />
-  <Marker position={[51.505, -0.09]}>
-    <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-    </Popup>
-  </Marker>
-</MapContainer>
+<MapContainer
+      center={center}
+      zoom={5}
+      style={{ width: '50%', height: '350px' }}
+    >
+      <TileLayer
+        url={url.toString()} 
+        attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+      />
+      {
+        statesData.features.map((state) => {
+          const coordinates = state.geometry.coordinates[0]?.map((item) => [item[1], item[0]]);
+
+          return (<Polygon
+            pathOptions={{
+              fillColor: '#FD8D3C',
+              fillOpacity: 0.7,
+              weight: 2,
+              opacity: 1,
+              dashArray: '3', /// double check
+              color: 'black'
+            }}
+            positions={coordinates}
+            eventHandlers={{
+              mouseover: (e) => {
+                const layer = e.target;
+                layer.setStyle({
+                  dashArray: "",
+                  fillColor: "#BD0026",
+                  fillOpacity: 0.7,
+                  weight: 2,
+                  opacity: 1,
+                  color: "white",
+                })
+              },
+              mouseout: (e) => {
+                const layer = e.target;
+                layer.setStyle({
+                  fillOpacity: 0.7,
+                  weight: 2,
+                  dashArray: "3",
+                  color: 'white',
+                  fillColor: '#FD8D3C'
+                });
+              },
+              click: (e) => {
+
+              }
+            }}
+          />)
+        })
+      }
+    </MapContainer>
   );
 }
 

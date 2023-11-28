@@ -30,8 +30,10 @@ function parseAddress(address) {
     const street_address = match[1].trim();
     const suite = match[2] ? match[2].trim() : null;
     const city = match[3].trim();
-    const state = match[4].trim();
+    const stateAbbrevation = match[4].trim();
     const zip_code = match[5].trim();
+
+    const state = abbrevToFullName(stateAbbrevation);
 
     // Create and return a JSON object
     return {
@@ -79,7 +81,7 @@ export const states = [
   // "new-hampshire",
   // "new-jersey",
   // "new-mexico",
-  // "new-york",
+  "new-york", ///// NEED to get Data
   // "north-carolina",
   // "north-dakota",
   // "ohio",
@@ -97,8 +99,75 @@ export const states = [
   // "washington",
   // "west-virginia",
   // "wisconsin",
-  "wyoming",
+  // "wyoming",
 ];
+
+function abbrevToFullName(abbreviation) {
+  const stateAbbreviations = {
+    AL: 'Alabama',
+    AK: 'Alaska',
+    AZ: 'Arizona',
+    AR: 'Arkansas',
+    CA: 'California',
+    CO: 'Colorado',
+    CT: 'Connecticut',
+    DE: 'Delaware',
+    FL: 'Florida',
+    GA: 'Georgia',
+    HI: 'Hawaii',
+    ID: 'Idaho',
+    IL: 'Illinois',
+    IN: 'Indiana',
+    IA: 'Iowa',
+    KS: 'Kansas',
+    KY: 'Kentucky',
+    LA: 'Louisiana',
+    ME: 'Maine',
+    MD: 'Maryland',
+    MA: 'Massachusetts',
+    MI: 'Michigan',
+    MN: 'Minnesota',
+    MS: 'Mississippi',
+    MO: 'Missouri',
+    MT: 'Montana',
+    NE: 'Nebraska',
+    NV: 'Nevada',
+    NH: 'New Hampshire',
+    NJ: 'New Jersey',
+    NM: 'New Mexico',
+    NY: 'New York',
+    NC: 'North Carolina',
+    ND: 'North Dakota',
+    OH: 'Ohio',
+    OK: 'Oklahoma',
+    OR: 'Oregon',
+    PA: 'Pennsylvania',
+    RI: 'Rhode Island',
+    SC: 'South Carolina',
+    SD: 'South Dakota',
+    TN: 'Tennessee',
+    TX: 'Texas',
+    UT: 'Utah',
+    VT: 'Vermont',
+    VA: 'Virginia',
+    WA: 'Washington',
+    WV: 'West Virginia',
+    WI: 'Wisconsin',
+    WY: 'Wyoming',
+  };
+
+  // Convert the abbreviation to uppercase for case-insensitivity
+  const uppercaseAbbreviation = abbreviation.toUpperCase();
+
+  // Check if the abbreviation exists in the stateAbbreviations object
+  if (stateAbbreviations.hasOwnProperty(uppercaseAbbreviation)) {
+    return stateAbbreviations[uppercaseAbbreviation];
+  } else {
+    // Return the original input if no match is found
+    return abbreviation;
+  }
+}
+
 
 
 const url = "https://www.mountainproject.com/gyms/";
@@ -122,6 +191,7 @@ export const scrapeUSAGyms = async (state) => {
       );
       const gymHrefs = gymLinks.map((link) => link.getAttribute("href"));
 
+
       return gymHrefs;
     } catch (error) {
       console.error(`Error scraping ${state}:`, error);
@@ -140,7 +210,7 @@ export const scrapeUSAGyms = async (state) => {
 const runScapeForStates = async () => {
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 1,
+    maxConcurrency: 10,
     monitor: true,
     puppeteerOptions: {
       headless: true,
@@ -186,7 +256,7 @@ const runScapeForStates = async () => {
 
 
         collectedData.push(data);
- 
+
 
     } catch (error) {
       console.log("Error", error);
@@ -207,7 +277,7 @@ const runScapeForStates = async () => {
 return collectedData
 };
 
-// runScapeForStates()
+runScapeForStates()
 
 const processGymData = async () => {
   const data = await runScapeForStates();
@@ -225,7 +295,8 @@ const processGymData = async () => {
         zip_code: addressParsed?.zip_code,
       };
     });
-console.log(processData)
+return processData
+// console.log(processData)
   } else {
     console.log("No data");
   }
@@ -236,9 +307,14 @@ console.log(processData)
 async function upsertGyms() {
   try {
     const gyms = await processGymData();
+
+    const filteredGyms = gyms.filter((gym) => gym.gym !== undefined);
+
+    console.log(gyms)
+
     const { data, error } = await supabaseclient
       .from("Gym")
-      .upsert(gyms, { onConflict: "gym", ignoreDuplicates: true }); 
+      .upsert(filteredGyms, { onConflict: "gym", ignoreDuplicates: true }); 
 
     if (error) {
       console.error("Error pushing data to Supabase:", error);
