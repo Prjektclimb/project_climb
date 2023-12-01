@@ -18,7 +18,7 @@ export default function GymsLayout({
 			<StateList /> 
 		  </aside>
 		  
-		  <div className="flex-grow flex justify-center mt-24">
+		  <div className="flex-grow flex  justify-center items-center">
 			{children}
 		  </div>
 		  <div className=" flex justify-center mb-24">

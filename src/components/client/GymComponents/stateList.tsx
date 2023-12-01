@@ -18,7 +18,7 @@ export default function StateList() {
   const pathname = usePathname();
   return (
     <div>
-      <ScrollArea className="h-100% w-[350px] rounded-md border p-4 pb-24">
+      <ScrollArea className="h-100% w-[350px] rounded-md border mb-48 pb-24 bg-sky-50 p-4 space-x-4 shadow-md">
         {states.map((state) => (
           <li
             key={state}

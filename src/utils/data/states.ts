@@ -54,27 +54,4 @@ export const states = [
 
 
 
-  interface StateGeometry {
-	type: string;
-	coordinates: number[][][] | number[][][][];
-  }
-  
-  interface StateProperties {
-	name: string;
-	density: number;
-  }
-  
-  interface StateFeature {
-	type: string;
-	id: string;
-	properties: StateProperties;
-	geometry: StateGeometry;
-  }
-  
-  export interface StatesDataInterface {
-	type: string;
-	features: StateFeature[];
-  }
-  
-
  

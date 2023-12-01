@@ -39,8 +39,9 @@ export default function GymsByState() {
   }, [selectGym]);
 
   return (
-    <div className="flex">
-      <ScrollArea className="h-[100px] w-[350px] rounded-md border p-4 pb-24">
+    <div className="flex bg-sky-50 p-4 space-x-4 shadow-md">
+      <ScrollArea className="h-72 w-[350px] rounded-md  p-4  overflow-auto">
+        <div>
         <ul>
           {Object.values(GymData).map((gym) => (
             <li key={gym?.id}
@@ -49,7 +50,9 @@ export default function GymsByState() {
               {gym?.gym}
             </li>
           ))}
+        
         </ul>
+        </div>
       </ScrollArea>
       {selectGym ? (
         <GymsInformation GYM_NAME={selectGym} />
