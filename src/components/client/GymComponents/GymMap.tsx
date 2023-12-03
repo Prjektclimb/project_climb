@@ -13,36 +13,24 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
-import GymMapInterface from "./GymMapInterface";
-import { relative } from "path";
+import { LatLngType } from "~/types/leaftlet_types";
+import { useLocationMarker } from "~/functions/leaflet/locationMarker";
 
-interface LatLngType {
-  lat: number;
-  lng: number;
-}
 
-function LocationMarker() {
-  const [position, setPosition] = useState<LatLngType>({ lat: 0, lng: 0 });
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    },
-  });
+function LocationMarker() { 
+  const myLocation = useLocationMarker()
 
-  return position === null ? null : (
-    <Marker position={position}>
+  return myLocation === null ? null : (
+    <Marker position={myLocation}>
       <Popup>You are here</Popup>
     </Marker>
-  );
+  ) 
 }
 
 export default function GymMap() {
   const [stateName, setStateName] = useState<string | null>();
-  const [map, setMap] = useState(null);
+  
+  
 
   const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
   const [center, useCenter] = useState<LatLngType>(DEFAULT_POSITION);
@@ -67,6 +55,7 @@ export default function GymMap() {
         center={center}
         zoom={ZOOM_LEVEL}
         style={{ height: "300px", width: "100%"}}
+        
       >
         <TileLayer
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -84,8 +73,8 @@ export default function GymMap() {
               {stateName}
             </Tooltip>
           </GeoJSON>
+     <LocationMarker /> 
         </LayerGroup>
-        <LocationMarker />
       </MapContainer>
 
   );

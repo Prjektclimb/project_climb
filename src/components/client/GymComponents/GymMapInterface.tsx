@@ -3,6 +3,7 @@
 import { useState } from "react";
 import GymMap from "./GymMap";
 import { states } from "~/utils/data/states";
+import { useLocationMarker } from "~/functions/leaflet/locationMarker";
 
 export default function GymMapInterface() {
   const [inputValue, setInputValue] = useState("");
@@ -11,6 +12,10 @@ export default function GymMapInterface() {
     setInputValue(event.target.value.toLowerCase());
   };
   const matchingStates = states.filter((state) => state.startsWith(inputValue));
+
+  const handleLocationClick = () => { 
+console.log('click')
+  }
 
   return (
     <div className="flex w-6/12 flex-col">
@@ -33,17 +38,18 @@ export default function GymMapInterface() {
           <button className="btn btn-primary h-6/12">Search</button>
         </div>
 		<div>
-			<button>Find current location</button>
+			<button >Find current location</button>
 		</div>
-        <div className="flex flex-col items-center space-x-2">
+        {/* <div className="flex flex-col items-center space-x-2">
           <input
-            type="checkbox"
+           
             id="collapse-map"
             className="toggle"
             checked={true}
+			onChange={undefined}
           />
           <label htmlFor="collapse-map">Collapse Map</label>
-        </div>
+        </div> */}
       </div>
       <GymMap />
     </div>
