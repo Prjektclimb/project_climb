@@ -2,7 +2,7 @@ import StateList from "~/components/client/GymComponents/stateList"
 import dynamic from "next/dynamic";
 
 
-const DynamicMap = dynamic(() => import("~/components/client/GymComponents/GymMap"), { 
+const DynamicMap = dynamic(() => import("~/components/client/GymComponents/GymMapInterface"), { 
 	ssr: false
 })
 
@@ -18,7 +18,7 @@ export default function GymsLayout({
 			<StateList /> 
 		  </aside>
 		  
-		  <div className="flex-grow flex  justify-center items-center">
+		  <div className="flex-grow flex  justify-center items-center ">
 			{children}
 		  </div>
 		  <div className=" flex justify-center mb-24">
