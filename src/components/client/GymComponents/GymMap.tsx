@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useState, useEffect, useMemo, FC, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -10,6 +10,8 @@ import {
   useMapEvents,
   Marker,
   Popup,
+  useMap,
+  useMapEvent,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
@@ -17,25 +19,41 @@ import { LatLngType } from "~/types/leaftlet_types";
 import { useLocationMarker } from "~/functions/leaflet/locationMarker";
 
 
-function LocationMarker() { 
-  const myLocation = useLocationMarker()
+const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
+const DEFAULT_ZOOM_LEVEL = 3.3;
+
+
+// Find User's current location 
+const LocationMarker = () => {
+  const myLocation = useLocationMarker();
 
   return myLocation === null ? null : (
     <Marker position={myLocation}>
       <Popup>You are here</Popup>
     </Marker>
-  ) 
-}
+  );
+};
 
-export default function GymMap() {
+
+
+// 35.860119, -86.660156. Tennessee 
+const StateZoom = ({ map}: {map: L.Map | null}) => {
+  const [position, setPosition] = useState(() => map?.getCenter());
+  const onClick = useCallback(() => {
+    map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL)
+  }, [map]);
+
+  return( <button className="bg-green" onClick={onClick}>Reset View</button>) 
+};
+
+
+
+export default function GymMap({}) {
   const [stateName, setStateName] = useState<string | null>();
-  
-  
-
-  const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
   const [center, useCenter] = useState<LatLngType>(DEFAULT_POSITION);
-  const ZOOM_LEVEL = 3.3;
-
+  const [map, setMap] = useState<L.Map | null> (null)
+  const mapRef = useRef<L.Map | null>(null)
+ 
   const onEachFeature = (
     feature: { properties: { name: any } },
     layer: { on: (arg0: { mouseover: () => void }) => void },
@@ -49,12 +67,13 @@ export default function GymMap() {
     });
   };
 
-  return (
-
+  const displayMap = useMemo(
+    () => (
       <MapContainer
         center={center}
-        zoom={ZOOM_LEVEL}
-        style={{ height: "300px", width: "100%"}}
+        zoom={DEFAULT_ZOOM_LEVEL}
+        style={{ height: "300px", width: "100%" }}
+        ref={mapRef}
         
       >
         <TileLayer
@@ -73,9 +92,17 @@ export default function GymMap() {
               {stateName}
             </Tooltip>
           </GeoJSON>
-     <LocationMarker /> 
         </LayerGroup>
+        <LocationMarker />
       </MapContainer>
+    ),
+    [onEachFeature],
+  );
 
+  return (
+    <div>
+      <StateZoom map={mapRef.current} /> 
+      {displayMap}
+    </div>
   );
 }

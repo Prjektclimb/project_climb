@@ -5,6 +5,9 @@ import { LatLngType, } from "~/types/leaftlet_types";
 
 export const useLocationMarker = () => {
 	const [position, setPosition] = useState<LatLngType | null>({ lat: 0, lng: 0 });
+	
+
+	
 	const map = useMapEvents({
 	  click() {
 		map.locate();
@@ -19,4 +22,3 @@ export const useLocationMarker = () => {
   }
 
 
-  // Creating a hook that uses map and 

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import GymMap from "./GymMap";
 import { states } from "~/utils/data/states";
-import { useLocationMarker } from "~/functions/leaflet/locationMarker";
 
 export default function GymMapInterface() {
   const [inputValue, setInputValue] = useState("");
@@ -13,43 +12,33 @@ export default function GymMapInterface() {
   };
   const matchingStates = states.filter((state) => state.startsWith(inputValue));
 
-  const handleLocationClick = () => { 
-console.log('click')
-  }
+  const handleLocationMarker = () => {};
 
   return (
     <div className="flex w-6/12 flex-col">
       <div className=" flex h-12 items-center justify-between">
         <div className="flex space-x-2">
-          <div
-            className="flex flex-col justify-center"
-          >
+          <div className="flex flex-col justify-center">
             <input
               id="stateInput"
               value={inputValue}
               onChange={handleInputChange}
               placeholder="Enter a State"
-              className="border-gray border-2 z-10"
+              className="border-gray z-10 border-2"
             />
-           {inputValue.length > 1 && <ul className="absolute w-24 bg-white border border-gray-300 rounded-md shadow-lg  z-50 opacity-50">
-              <li>{matchingStates.slice(0,1)}</li>
-            </ul> } 
+            {inputValue.length > 1 && (
+              <ul className="absolute z-50 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
+                <li>{matchingStates.slice(0, 1)}</li>
+              </ul>
+            )}
           </div>
           <button className="btn btn-primary h-6/12">Search</button>
         </div>
-		<div>
-			<button >Find current location</button>
-		</div>
-        {/* <div className="flex flex-col items-center space-x-2">
-          <input
-           
-            id="collapse-map"
-            className="toggle"
-            checked={true}
-			onChange={undefined}
-          />
-          <label htmlFor="collapse-map">Collapse Map</label>
-        </div> */}
+        <div>
+          <button className="btn btn-accent" onClick={handleLocationMarker}>
+            Find current location
+          </button>
+        </div>
       </div>
       <GymMap />
     </div>

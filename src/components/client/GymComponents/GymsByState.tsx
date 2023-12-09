@@ -39,19 +39,22 @@ export default function GymsByState() {
   }, [selectGym]);
 
   return (
-    <div className="flex bg-sky-50 p-4 space-x-4 shadow-md">
-      <ScrollArea className="h-72 w-[350px] rounded-md  p-4  overflow-auto">
+    <div className="flex space-x-4 bg-sky-50 p-4 shadow-md">
+      <ScrollArea className="h-72 w-[350px] overflow-auto  rounded-md  p-4">
         <div>
-        <ul>
-          {Object.values(GymData).map((gym) => (
-            <li key={gym?.id}
-            className={selectGym === gym?.gym ? 'underline text-blue-500' : ''}
-             onClick={() => handleGymClick(gym?.gym)}>
-              {gym?.gym}
-            </li>
-          ))}
-        
-        </ul>
+          <ul>
+            {Object.values(GymData).map((gym) => (
+              <li
+                key={gym?.id}
+                className={
+                  selectGym === gym?.gym ? "text-blue-500 underline" : ""
+                }
+                onClick={() => handleGymClick(gym?.gym)}
+              >
+                {gym?.gym}
+              </li>
+            ))}
+          </ul>
         </div>
       </ScrollArea>
       {selectGym ? (
