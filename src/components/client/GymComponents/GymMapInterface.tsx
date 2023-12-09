@@ -1,10 +1,23 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import GymMap from "./GymMap";
 import { states } from "~/utils/data/states";
 
-export default function GymMapInterface() {
+const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
+const DEFAULT_ZOOM_LEVEL = 3.3;
+
+const StateZoom = ({ map}: {map: L.Map | null}) => {
+	const [position, setPosition] = useState(() => map?.getCenter());
+	const onClick = useCallback(() => {
+	  map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL)
+	}, [map]);
+  
+	return( <button className="bg-green" onClick={onClick}>Reset View</button>) 
+  };
+  
+
+export default function GymMapInterface({map}: {map: L.Map | null}) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +52,8 @@ export default function GymMapInterface() {
             Find current location
           </button>
         </div>
+		<StateZoom map={map} />
       </div>
-      <GymMap />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import StateList from "~/components/client/GymComponents/stateList"
 import dynamic from "next/dynamic";
 
 
-const DynamicMap = dynamic(() => import("~/components/client/GymComponents/GymMapInterface"), { 
+const DynamicMap = dynamic(() => import("~/components/client/GymComponents/GymMap"), { 
 	ssr: false
 })
 

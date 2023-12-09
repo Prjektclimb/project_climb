@@ -17,6 +17,7 @@ import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
 import { LatLngType } from "~/types/leaftlet_types";
 import { useLocationMarker } from "~/functions/leaflet/locationMarker";
+import GymMapInterface from "./GymMapInterface";
 
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
@@ -37,21 +38,20 @@ const LocationMarker = () => {
 
 
 // 35.860119, -86.660156. Tennessee 
-const StateZoom = ({ map}: {map: L.Map | null}) => {
-  const [position, setPosition] = useState(() => map?.getCenter());
-  const onClick = useCallback(() => {
-    map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL)
-  }, [map]);
+// const StateZoom = ({ map}: {map: L.Map | null}) => {
+//   const [position, setPosition] = useState(() => map?.getCenter());
+//   const onClick = useCallback(() => {
+//     map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL)
+//   }, [map]);
 
-  return( <button className="bg-green" onClick={onClick}>Reset View</button>) 
-};
+//   return( <button className="bg-green" onClick={onClick}>Reset View</button>) 
+// };
 
 
 
 export default function GymMap({}) {
   const [stateName, setStateName] = useState<string | null>();
   const [center, useCenter] = useState<LatLngType>(DEFAULT_POSITION);
-  const [map, setMap] = useState<L.Map | null> (null)
   const mapRef = useRef<L.Map | null>(null)
  
   const onEachFeature = (
@@ -101,7 +101,8 @@ export default function GymMap({}) {
 
   return (
     <div>
-      <StateZoom map={mapRef.current} /> 
+      <GymMapInterface map={mapRef.current}/> 
+      {/* <StateZoom map={mapRef.current} />  */}
       {displayMap}
     </div>
   );
