@@ -1,53 +1,21 @@
 "use client";
 
-import { useCallback, useState, useEffect, useMemo, FC, useRef } from "react";
+import { useState,useMemo, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
   GeoJSON,
   Tooltip,
   LayerGroup,
-  useMapEvents,
-  Marker,
-  Popup,
-  useMap,
-  useMapEvent,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
 import { LatLngType } from "~/types/leaftlet_types";
-import { useLocationMarker } from "~/functions/leaflet/locationMarker";
 import GymMapInterface from "./GymMapInterface";
 
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
-
-
-// Find User's current location 
-const LocationMarker = () => {
-  const myLocation = useLocationMarker();
-
-  return myLocation === null ? null : (
-    <Marker position={myLocation}>
-      <Popup>You are here</Popup>
-    </Marker>
-  );
-};
-
-
-
-// 35.860119, -86.660156. Tennessee 
-// const StateZoom = ({ map}: {map: L.Map | null}) => {
-//   const [position, setPosition] = useState(() => map?.getCenter());
-//   const onClick = useCallback(() => {
-//     map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL)
-//   }, [map]);
-
-//   return( <button className="bg-green" onClick={onClick}>Reset View</button>) 
-// };
-
-
 
 export default function GymMap({}) {
   const [stateName, setStateName] = useState<string | null>();
@@ -93,7 +61,6 @@ export default function GymMap({}) {
             </Tooltip>
           </GeoJSON>
         </LayerGroup>
-        <LocationMarker />
       </MapContainer>
     ),
     [onEachFeature],
@@ -102,7 +69,6 @@ export default function GymMap({}) {
   return (
     <div>
       <GymMapInterface map={mapRef.current}/> 
-      {/* <StateZoom map={mapRef.current} />  */}
       {displayMap}
     </div>
   );
