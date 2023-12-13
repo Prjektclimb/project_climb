@@ -13,25 +13,37 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
   }, [map]);
 
   return (
-    <button className="bg-green" onClick={onClick}>
+    <button className="btn btn-secondary" onClick={onClick}>
       Reset View
     </button>
   );
 };
 
+// GymMapInterface component for the main functionality
 export default function GymMapInterface({ map }: { map: L.Map | null }) {
+  // State for the input value
   const [inputValue, setInputValue] = useState("");
-  const handleMyLocation = useLocationMarker({ map }); // for Geolocation
+
+  // Hook for handling location marker
+  const locationMarker = useLocationMarker({map})
+
+  // Handler for input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value.toLowerCase());
   };
-  const matchingStates = states.filter((state) => state.startsWith(inputValue));
+
+
+  // Filtering matching states based on the input value
+  const matchingStates = states.filter((state) =>
+    state.toLowerCase().startsWith(inputValue),
+  );
 
   return (
-    <div className="flex w-6/12 flex-col">
-      <div className=" flex h-12 items-center justify-between">
+    <div className="flex w-6/12 flex-col p-2">
+      <div className="flex h-12 items-center justify-between">
         <div className="flex space-x-2">
           <div className="flex flex-col justify-center">
+            {/* Input for entering a state */}
             <input
               id="stateInput"
               value={inputValue}
@@ -39,18 +51,31 @@ export default function GymMapInterface({ map }: { map: L.Map | null }) {
               placeholder="Enter a State"
               className="border-gray z-10 border-2"
             />
+
+            {/* Display matching states in a dropdown */}
             {inputValue.length > 1 && (
               <ul className="absolute z-50 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
-                <li>{matchingStates.slice(0, 1)}</li>
+                {matchingStates.map((state, index) => (
+                  <li key={index}>{state}</li>
+                ))}
               </ul>
             )}
           </div>
-          <button className="btn btn-primary h-6/12">Search</button>
+
+          {/* Search button */}
+          <button className="btn btn-primary h-12">Search</button>
+
+          {/* Button to trigger the location marker */}
+          <button
+            className="btn btn-secondary"
+            onClick={()=> locationMarker}
+          >
+            Find my Location
+          </button>
+
+          {/* ResetZoom component */}
+          <ResetZoom map={map} />
         </div>
-        <div>
-          <button onClick={() => handleMyLocation}> Find my Location</button>
-        </div>
-        <ResetZoom map={map} />
       </div>
     </div>
   );

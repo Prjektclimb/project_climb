@@ -6,7 +6,7 @@ import { marker, popup } from "leaflet";
 
 
 export const useLocationMarker = ({map}: {map: L.Map | null}) => {
-useEffect(() => {
+		useEffect(() => {
 
 			if (!("geolocation" in navigator)) { console.log('Gelocation Not Supported')}
 
