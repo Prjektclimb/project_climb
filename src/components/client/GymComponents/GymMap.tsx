@@ -12,8 +12,8 @@ import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
 import { LatLngType, DEFAULT_LAYER_TYPE } from "~/types/leaftlet_types";
 import GymMapInterface from "./GymMapInterface";
-import { Layer, geoJSON, layerGroup } from "leaflet";
-
+import { useRouter } from "next/navigation";
+import { formatState } from "~/functions&hooks/general_functions";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -21,24 +21,35 @@ const DEFAULT_ZOOM_LEVEL = 3.3;
 
 
 const DEFAULT_LAYER_STYLE = {  
-fillColor: "white", 
+fillColor: "gray", 
 weight: 2,
 color: "black",
 dashArray: "1",
-fillOpacity: 1,}
+fillOpacity: .5,}
+
+
+
 
 
 export default function GymMap({}) {
   const [stateName, setStateName] = useState<string | null>();
   const [center, useCenter] = useState<LatLngType>(DEFAULT_POSITION);
   const mapRef = useRef<L.Map | null>(null)
+  const geoRef = useRef<L.GeoJSON | null >(null)
+
+  //ROUTER
+  const router = useRouter();
  
   const onEachFeature = (
     feature: { properties: { name: any } },
     layer: { on: (arg0: { mouseover: () => void; click: () => void; mouseout: () => void }) => void;
     setStyle: (layer: DEFAULT_LAYER_TYPE) => void; }
 ) => {
+
   const stateNameRef = feature.properties.name;
+
+
+  const formatStateName = formatState(stateNameRef)   // For Router SLUG
 
     layer.on({
       mouseover: () => {
@@ -52,6 +63,7 @@ export default function GymMap({}) {
         });
       },
       click: () => { 
+          router.push(`http://localhost:3000/gyms/${formatStateName}`)
       
       },
       mouseout: () => { 
@@ -82,6 +94,7 @@ export default function GymMap({}) {
             //@ts-ignore
             onEachFeature={onEachFeature}
             style={DEFAULT_LAYER_STYLE}
+            ref={geoRef}
           >
             <Tooltip offset={[0, 20]} opacity={1}>
               {stateName}
@@ -95,7 +108,7 @@ export default function GymMap({}) {
 
   return (
     <div>
-      <GymMapInterface map={mapRef.current}/> 
+      <GymMapInterface map={mapRef.current} geo={geoRef.current}/> 
       {displayMap}
     </div>
   );
