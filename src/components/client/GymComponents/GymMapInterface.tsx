@@ -21,6 +21,9 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
   );
 };
 
+
+
+
 // GymMapInterface component for the main functionality
 export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: L.GeoJSON | null }) {
   // State for the input value
@@ -40,10 +43,11 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
     state.toLowerCase().startsWith(inputValue),
   );
 
-  console.log(map)
+  
 
+  // Need tp get attrivution? 
 map?.eachLayer((layer) => { 
-layer.getAttribution	
+const name = layer.getAttribution
 })
 
 
