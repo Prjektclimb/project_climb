@@ -45,10 +45,10 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
 
   
 
-  // Need tp get attrivution? 
-map?.eachLayer((layer) => { 
-const name = layer.getAttribution
-})
+//   // Need tp get attrivution? 
+// map?.eachLayer((layer) => { 
+// const name = layer.getAttribution
+// })
 
 
 

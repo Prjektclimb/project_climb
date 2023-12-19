@@ -24,7 +24,7 @@ const DEFAULT_LAYER_STYLE = {
   weight: 2,
   color: "black",
   dashArray: "1",
-  fillOpacity: .5,
+  fillOpacity: 0.5,
 };
 
 export default function GymMap({}) {
@@ -37,23 +37,19 @@ export default function GymMap({}) {
   const router = useRouter();
 
   const onEachFeature = (
-    feature: { properties: { name: string},  geometry: {coordinates: any} },
+    feature: { properties: { name: string }; geometry: { coordinates: any } },
     layer: {
-      on: (
-        arg0: {
-          mouseover: () => void;
-          click: () => void;
-          mouseout: () => void;
-        },
-      ) => void;
+      on: (arg0: {
+        mouseover: () => void;
+        click: () => void;
+        mouseout: () => void;
+      }) => void;
       setStyle: (layer: DEFAULT_LAYER_TYPE) => void;
     },
   ) => {
     const stateNameRef = feature.properties.name;
 
     const formatStateName = formatState(stateNameRef); // For Router SLUG
-
-
 
     layer.on({
       mouseover: () => {
@@ -69,15 +65,13 @@ export default function GymMap({}) {
       click: () => {
         router.push(`http://localhost:3000/gyms/${formatStateName}`);
 
+        // why is it undefine???? 
+        const stateCoordinatesMap = stateCoordinates[formatStateName];
 
-
-        const stateCoordinatesMap = stateCoordinates[formatStateName]
-
-        //@ts-ignore
-        mapRef.current?.flyTo([stateCoordinatesMap.lat, stateCoordinatesMap.lng], 5)
-        
-        
-     
+        mapRef.current?.flyTo(
+          [stateCoordinatesMap.lat, stateCoordinatesMap.lng],
+          5,
+        );
       },
       mouseout: () => {
         layer.setStyle(DEFAULT_LAYER_STYLE);
