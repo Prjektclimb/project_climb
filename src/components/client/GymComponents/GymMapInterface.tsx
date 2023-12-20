@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { states } from "~/utils/data/states";
 import { useLocationMarker } from "~/functions&hooks/leaflet/hooks/locationMarker";
-import { FeatureGroup, Path, featureGroup, geoJson } from "leaflet";
-
+import { stateCoordinates } from "~/utils/data/states_latlng";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -21,36 +20,58 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
   );
 };
 
-
-
-
 // GymMapInterface component for the main functionality
-export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: L.GeoJSON | null }) {
+export default function GymMapInterface({
+  map,
+  geo,
+}: {
+  map: L.Map | null;
+  geo: L.GeoJSON | null;
+}) {
   // State for the input value
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [stateOption, setStateOption] = useState<string>("");
 
   // Hook for handling location marker
-  const locationMarker = useLocationMarker({map})
+  const locationMarker = useLocationMarker({ map });
 
   // Handler for input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value.toLowerCase());
   };
 
+  const handleKeyDown = (event: any) => {
+    const stateCorrdinatesMap = stateCoordinates[stateOption];
+
+    const firstMatchingState = matchingStates[0];
+    if (firstMatchingState) {
+      setStateOption(firstMatchingState);
+    }
+
+    if (event.key === "Enter") {
+      if (firstMatchingState) {
+        setInputValue(stateOption);
+        console.log("firstmatching on Enter", firstMatchingState);
+        console.log("state option on enter", stateOption);
+      }
+
+      if (stateCorrdinatesMap) {
+        map?.flyTo([stateCorrdinatesMap?.lat, stateCorrdinatesMap.lng], 5);
+      } else {
+        console.error(`Coordinates not found for state: ${stateOption}`);
+      }
+    }
+  };
 
   // Filtering matching states based on the input value
-  const matchingStates = states.filter((state) =>
-    state.toLowerCase().startsWith(inputValue),
-  );
-
-  
-
-//   // Need tp get attrivution? 
-// map?.eachLayer((layer) => { 
-// const name = layer.getAttribution
-// })
-
-
+  const matchingStates = states
+    .filter((state) => state.toLowerCase().startsWith(inputValue))
+    .sort(
+      (a, b) =>
+        Math.abs(a.localeCompare(inputValue)) -
+        Math.abs(b.localeCompare(inputValue)),
+    )
+    .slice(0, 1);
 
   return (
     <div className="flex w-6/12 flex-col p-2">
@@ -62,6 +83,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
               id="stateInput"
               value={inputValue}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               placeholder="Enter a State"
               className="border-gray z-10 border-2"
             />
@@ -70,7 +92,9 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
             {inputValue.length > 1 && (
               <ul className="absolute z-50 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
                 {matchingStates.map((state, index) => (
-                  <li key={index}>{state}</li>
+                  <li key={index}>
+                    {state}
+                  </li>
                 ))}
               </ul>
             )}
@@ -80,10 +104,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
           <button className="btn btn-primary h-12">Search</button>
 
           {/* Button to trigger the location marker */}
-          <button
-            className="btn btn-secondary"
-            onClick={()=> locationMarker}
-          >
+          <button className="btn btn-secondary" onClick={() => locationMarker}>
             Find my Location
           </button>
 

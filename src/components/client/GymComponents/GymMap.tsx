@@ -65,13 +65,14 @@ export default function GymMap({}) {
       click: () => {
         router.push(`http://localhost:3000/gyms/${formatStateName}`);
 
-        // why is it undefine???? 
+        if (mapRef.current) {
         const stateCoordinatesMap = stateCoordinates[formatStateName];
 
         mapRef.current?.flyTo(
           [stateCoordinatesMap.lat, stateCoordinatesMap.lng],
           5,
         );
+        } 
       },
       mouseout: () => {
         layer.setStyle(DEFAULT_LAYER_STYLE);
