@@ -6,6 +6,7 @@ import { states } from "~/utils/data/states";
 import { useLocationMarker } from "~/functions&hooks/leaflet/hooks/locationMarker";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { Button } from "@/components/ui/button";
+import { GeoLayerOptionProps } from "~/types/leaftlet_types";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -23,22 +24,30 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
 };
 
 
-const ExtraOption = ({ map, geo }: { map: L.Map | null, geo: L.GeoJSON}) => { 
+const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
+  const [layerVisible, setLayerVisible] = useState<boolean>(true);
+  const layerButtonLabel = layerVisible ? "Remove States Layer" : "Add States Layer";
 
- 
-  const onClick = useCallback(() => { 
+  const onClick = useCallback(() => {
     if (map && geo) {
-    console.log('layer should be removed')
-    map.removeLayer(geo)
-    } 
-  }, [map])
+      if (layerVisible) {
+        map.removeLayer(geo);
+      } else {
+        map.addLayer(geo);
+      }
 
-  return ( 
-    <Button className="btn btn-secondary" onClick={onClick}>Remove Layer</Button>
-  )
-  
+      // Toggle the visibility state
+      setLayerVisible((prev) => !prev);
+    }
+  }, [map, geo, layerVisible]);
 
-}
+  return (
+    <Button className="btn btn-secondary" onClick={onClick}>
+      {layerButtonLabel}
+    </Button>
+  );
+};
+
 
 // GymMapInterface component for the main functionality
 export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: L.GeoJSON}) {
