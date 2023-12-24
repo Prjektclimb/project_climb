@@ -14,7 +14,7 @@ export default function GymsLayout({
 	return (
 		<div className="flex flex-col h-screen justify-evenly">
 		  <aside className="flex-none h-full p-5 fixed overflow-auto z-10">
-			<p className="text-3xl">Find a Gym</p>
+			
 			<StateList /> 
 		  </aside>
 		  

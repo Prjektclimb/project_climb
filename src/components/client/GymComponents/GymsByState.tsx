@@ -39,23 +39,27 @@ export default function GymsByState() {
   }, [selectGym]);
 
   return (
-    <div className="flex space-x-4 bg-sky-50 p-4 shadow-md">
-      <ScrollArea className="h-72 w-[350px] overflow-auto  rounded-md  p-4">
-        <div>
-          <ul>
-            {Object.values(GymData).map((gym) => (
-              <li
-                key={gym?.id}
-                className={
-                  selectGym === gym?.gym ? "text-blue-500 underline" : ""
-                }
-                onClick={() => handleGymClick(gym?.gym)}
-              >
-                {gym?.gym}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="flex flex-col lg:flex-row space-x-4 p-4 shadow-md">
+      <ScrollArea className=" w-full overflow-auto  rounded-md  p-4 bg-sky-50">
+      <div className="m-12">
+  {Object.keys(GymData).length === 0 ? (
+    <p>Select a state</p>
+  ) : (
+    <ul>
+      {Object.values(GymData).map((gym) => (
+        <li
+          key={gym?.id}
+          className={
+            selectGym === gym?.gym ? "text-blue-500 underline" : ""
+          }
+          onClick={() => handleGymClick(gym?.gym)}
+        >
+          {gym?.gym}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
       </ScrollArea>
       {selectGym ? (
         <GymsInformation GYM_NAME={selectGym} />

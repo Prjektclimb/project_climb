@@ -7,7 +7,7 @@ import UserName from "~/components/client/UserName";
 export default async function Header() {
 
   return (
-    <header className="flex flex-row justify-between p-2 px-10">
+    <header className="flex flex-row justify-between p-2 px-10  z-10">
       <p className="font-bold">LOGO</p>
       <UserName  />
       <nav className="flex flex-row">

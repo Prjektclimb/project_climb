@@ -9,4 +9,5 @@ export interface LatLngType {
 	weight?: number,
 	color?: string,
 	dashArray?: string,
-	fillOpacity?: number}
+	fillOpacity?: number,
+	}

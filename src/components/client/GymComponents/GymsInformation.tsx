@@ -19,9 +19,10 @@ useEffect(() => {
 
 
   return (
-	<div className="flex flex-col h-[100px] w-[350px] rounded-md border p-4 pb-24 ">
-	<p>info {GymInfo?.gym}</p>
-	<p>{GymInfo?.phone_number}</p>
-	</div>
+	<div className="flex flex-col  rounded-md border p-4 pb-24">
+  <p>info {GymInfo?.gym}</p>
+  <p>{GymInfo?.phone_number}</p>
+</div>
+
   )
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { states } from "~/utils/data/states";
 import { useLocationMarker } from "~/functions&hooks/leaflet/hooks/locationMarker";
 import { stateCoordinates } from "~/utils/data/states_latlng";
@@ -23,10 +24,8 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
 // GymMapInterface component for the main functionality
 export default function GymMapInterface({
   map,
-  geo,
 }: {
   map: L.Map | null;
-  geo: L.GeoJSON | null;
 }) {
   // State for the input value
   const [inputValue, setInputValue] = useState<string>("");
@@ -34,6 +33,7 @@ export default function GymMapInterface({
 
   // Hook for handling location marker
   const locationMarker = useLocationMarker({ map });
+  const router  = useRouter(); 
 
   // Handler for input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,11 +51,14 @@ export default function GymMapInterface({
     if (event.key === "Enter") {
       if (firstMatchingState) {
         setInputValue(stateOption);
-        console.log("firstmatching on Enter", firstMatchingState);
-        console.log("state option on enter", stateOption);
+        
       }
 
+      //router
+
+      // Fly to State on ENTER
       if (stateCorrdinatesMap) {
+        router.push(`http://localhost:3000/gyms/${stateOption}`);
         map?.flyTo([stateCorrdinatesMap?.lat, stateCorrdinatesMap.lng], 5);
       } else {
         console.error(`Coordinates not found for state: ${stateOption}`);

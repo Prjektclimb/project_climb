@@ -15,16 +15,18 @@ import GymMapInterface from "./GymMapInterface";
 import { useRouter } from "next/navigation";
 import { formatState } from "~/functions&hooks/general_functions";
 import { stateCoordinates } from "~/utils/data/states_latlng";
+import { PathOptions } from "leaflet";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
 
-const DEFAULT_LAYER_STYLE = {
+const DEFAULT_LAYER_STYLE: PathOptions = {
   fillColor: "gray",
   weight: 2,
   color: "black",
   dashArray: "1",
-  fillOpacity: 0.5,
+  fillOpacity: .1, 
+ 
 };
 
 export default function GymMap({}) {
@@ -44,7 +46,7 @@ export default function GymMap({}) {
         click: () => void;
         mouseout: () => void;
       }) => void;
-      setStyle: (layer: DEFAULT_LAYER_TYPE) => void;
+      setStyle: (layer: PathOptions) => void;
     },
   ) => {
     const stateNameRef = feature.properties.name;
@@ -66,18 +68,26 @@ export default function GymMap({}) {
         router.push(`http://localhost:3000/gyms/${formatStateName}`);
 
         if (mapRef.current) {
-        const stateCoordinatesMap = stateCoordinates[formatStateName];
+          const stateCoordinatesMap = stateCoordinates[formatStateName];
 
-        mapRef.current?.flyTo(
-          [stateCoordinatesMap.lat, stateCoordinatesMap.lng],
-          5,
-        );
-        } 
+          if (stateCoordinatesMap) {
+            mapRef.current?.flyTo(
+              [stateCoordinatesMap.lat, stateCoordinatesMap.lng],
+              5,
+            );
+          } else {
+            console.error(
+              `Coordinates not found for state: ${formatStateName}`,
+            );
+          }
+        }
       },
       mouseout: () => {
         layer.setStyle(DEFAULT_LAYER_STYLE);
       },
     });
+
+    
   };
 
   const displayMap = useMemo(
@@ -114,7 +124,7 @@ export default function GymMap({}) {
 
   return (
     <div>
-      <GymMapInterface map={mapRef.current} geo={geoRef.current} />
+      <GymMapInterface map={mapRef.current}  />
       {displayMap}
     </div>
   );
