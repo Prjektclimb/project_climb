@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { states } from "~/utils/data/states";
 import { useLocationMarker } from "~/functions&hooks/leaflet/hooks/locationMarker";
 import { stateCoordinates } from "~/utils/data/states_latlng";
+import { Button } from "@/components/ui/button";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -21,19 +22,33 @@ const ResetZoom = ({ map }: { map: L.Map | null }) => {
   );
 };
 
+
+const ExtraOption = ({ map, geo }: { map: L.Map | null, geo: L.GeoJSON}) => { 
+
+ 
+  const onClick = useCallback(() => { 
+    if (map && geo) {
+    console.log('layer should be removed')
+    map.removeLayer(geo)
+    } 
+  }, [map])
+
+  return ( 
+    <Button className="btn btn-secondary" onClick={onClick}>Remove Layer</Button>
+  )
+  
+
+}
+
 // GymMapInterface component for the main functionality
-export default function GymMapInterface({
-  map,
-}: {
-  map: L.Map | null;
-}) {
+export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: L.GeoJSON}) {
   // State for the input value
   const [inputValue, setInputValue] = useState<string>("");
   const [stateOption, setStateOption] = useState<string>("");
 
   // Hook for handling location marker
   const locationMarker = useLocationMarker({ map });
-  const router  = useRouter(); 
+  const router = useRouter();
 
   // Handler for input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,11 +66,7 @@ export default function GymMapInterface({
     if (event.key === "Enter") {
       if (firstMatchingState) {
         setInputValue(stateOption);
-        
       }
-
-      //router
-
       // Fly to State on ENTER
       if (stateCorrdinatesMap) {
         router.push(`http://localhost:3000/gyms/${stateOption}`);
@@ -95,9 +106,7 @@ export default function GymMapInterface({
             {inputValue.length > 1 && (
               <ul className="absolute z-50 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
                 {matchingStates.map((state, index) => (
-                  <li key={index}>
-                    {state}
-                  </li>
+                  <li key={index}>{state}</li>
                 ))}
               </ul>
             )}
@@ -113,6 +122,7 @@ export default function GymMapInterface({
 
           {/* ResetZoom component */}
           <ResetZoom map={map} />
+          <ExtraOption map={map} geo={geo}/>
         </div>
       </div>
     </div>

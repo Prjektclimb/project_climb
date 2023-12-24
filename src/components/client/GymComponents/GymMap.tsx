@@ -33,10 +33,10 @@ export default function GymMap({}) {
   const [stateName, setStateName] = useState<string | null>();
   const [center, useCenter] = useState<LatLngType>(DEFAULT_POSITION);
   const mapRef = useRef<L.Map | null>(null);
-  const geoRef = useRef<L.GeoJSON | null>(null);
+  const layerRef = useRef<L.GeoJSON | null>(null);
 
   //ROUTER
-  const router = useRouter();
+  const router = useRouter()
 
   const onEachFeature = (
     feature: { properties: { name: string }; geometry: { coordinates: any } },
@@ -103,14 +103,14 @@ export default function GymMap({}) {
           maxZoom={19}
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
-        <LayerGroup>
+        <LayerGroup ref={layerRef}>
           <GeoJSON
             //@ts-ignore
             data={statesData}
             //@ts-ignore
             onEachFeature={onEachFeature}
             style={DEFAULT_LAYER_STYLE}
-            ref={geoRef}
+            
           >
             <Tooltip offset={[0, 20]} opacity={1}>
               {stateName}
@@ -124,7 +124,7 @@ export default function GymMap({}) {
 
   return (
     <div>
-      <GymMapInterface map={mapRef.current}  />
+      <GymMapInterface map={mapRef.current as L.Map} geo={layerRef.current as L.GeoJSON} />
       {displayMap}
     </div>
   );
