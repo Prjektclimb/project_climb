@@ -95,7 +95,7 @@ export default function GymMap({}) {
       <MapContainer
         center={center}
         zoom={DEFAULT_ZOOM_LEVEL}
-        style={{ height: "300px", width: "100%", border: "2px solid gray" }}
+        style={{ height: "300px", width: "100%", border: "2px solid gray", zIndex: 1 }}
         ref={mapRef}
       >
         <TileLayer

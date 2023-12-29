@@ -11,24 +11,12 @@ import { GeoLayerOptionProps } from "~/types/leaftlet_types";
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
 
-const ResetZoom = ({ map }: { map: L.Map | null }) => {
-  const onClick = useCallback(() => {
-    map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL);
-  }, [map]);
-
-  return (
-    <button className="btn btn-secondary" onClick={onClick}>
-      Reset View
-    </button>
-  );
-};
-
 
 const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
   const [layerVisible, setLayerVisible] = useState<boolean>(true);
   const layerButtonLabel = layerVisible ? "Remove States Layer" : "Add States Layer";
 
-  const onClick = useCallback(() => {
+  const onStateLayer = useCallback(() => {
     if (map && geo) {
       if (layerVisible) {
         map.removeLayer(geo);
@@ -41,10 +29,18 @@ const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
     }
   }, [map, geo, layerVisible]);
 
+  const onResetView = useCallback(() => {
+    map?.setView(DEFAULT_POSITION, DEFAULT_ZOOM_LEVEL);
+  }, [map]);
+
   return (
-    <Button className="btn btn-secondary" onClick={onClick}>
-      {layerButtonLabel}
-    </Button>
+    <div className="dropdown dropdown-right dropdown-end">
+    <div tabIndex={0} role="button" className="btn m-1">Menu</div>
+    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+      <li onClick={onStateLayer}><a>{layerButtonLabel}</a></li>
+      <li onClick={onResetView}><a>Reset View</a></li>
+    </ul>
+  </div>
   );
 };
 
@@ -108,12 +104,12 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
               placeholder="Enter a State"
-              className="border-gray z-10 border-2"
+              className="border-gray z-0 border-2"
             />
 
             {/* Display matching states in a dropdown */}
             {inputValue.length > 1 && (
-              <ul className="absolute z-50 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
+              <ul className="absolute z-0 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
                 {matchingStates.map((state, index) => (
                   <li key={index}>{state}</li>
                 ))}
@@ -128,9 +124,6 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
           <button className="btn btn-secondary" onClick={() => locationMarker}>
             Find my Location
           </button>
-
-          {/* ResetZoom component */}
-          <ResetZoom map={map} />
           <ExtraOption map={map} geo={geo}/>
         </div>
       </div>

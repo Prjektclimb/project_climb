@@ -40,7 +40,7 @@ export default function GymsByState() {
 
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-4 shadow-md">
-      <ScrollArea className=" w-full overflow-auto  rounded-md  p-4 bg-sky-50">
+      <ScrollArea className=" w-full overflow-auto  rounded-md  p-4 ">
       <div className="m-12">
   {Object.keys(GymData).length === 0 ? (
     <p>Select a state</p>
