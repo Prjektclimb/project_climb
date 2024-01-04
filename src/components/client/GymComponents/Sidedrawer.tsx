@@ -23,7 +23,7 @@ export default function SideDrawerNav() {
   const [accordionStates, setAccordionStates] = useState([false, false]);
 
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className=" sm:pt-10">
       <AccordionItem value="item-1">
         <AccordionTrigger>View State List</AccordionTrigger>
         <AccordionContent>
