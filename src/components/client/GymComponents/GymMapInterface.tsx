@@ -93,7 +93,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
     .slice(0, 1);
 
   return (
-    <div className="flex w-6/12 flex-col p-2">
+    <div className="flex w-6/12 flex-col p-10 ">
       <div className="flex h-12 items-center justify-between">
         <div className="flex space-x-2">
           <div className="flex flex-col justify-center">
@@ -118,13 +118,13 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
           </div>
 
           {/* Search button */}
-          <button className="btn btn-primary h-12">Search</button>
+          <Button variant='outline'>Search</Button>
 
           {/* Button to trigger the location marker */}
-          <button className="btn btn-secondary" onClick={() => locationMarker}>
+          <Button variant='outline' onClick={() => locationMarker}>
             Find my Location
-          </button>
-          <ExtraOption map={map} geo={geo}/>
+          </Button>
+          {/* <ExtraOption map={map} geo={geo}/> */}
         </div>
       </div>
     </div>
