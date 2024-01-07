@@ -20,9 +20,9 @@ import {
 import StateList from "./StateList";
 
 export default function SideDrawerNav() {
-  const [accordionStates, setAccordionStates] = useState([false, false]);
+  
 
-  // Base of view port, hide accordion, make side button to open a drop down/menu 
+  // Base of view port, hide accordion, make side button to open a drop down/menu
   return (
     <Accordion type="single" collapsible className="sm:pt-10">
       <AccordionItem value="item-1">
@@ -34,7 +34,7 @@ export default function SideDrawerNav() {
       <AccordionItem value="item-2">
         <AccordionTrigger>addiontal items TEST</AccordionTrigger>
         <AccordionContent>
-      <p>Nothing to note</p>
+          <p>Nothing to note</p>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
