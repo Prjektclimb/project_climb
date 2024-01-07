@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { states } from "~/utils/data/states";
-import { useLocationMarker } from "~/functions&hooks/leaflet/hooks/locationMarker";
+import { useLocationMarker } from "~/functions&hooks/hooks/locationMarker";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { Button } from "@/components/ui/button";
 import { GeoLayerOptionProps } from "~/types/leaftlet_types";
