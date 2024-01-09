@@ -9,6 +9,14 @@ const DynamicMap = dynamic(
   },
 );
 
+
+const DynamicSideDrawer = dynamic(
+  () => import("~/components/client/GymComponents/Sidedrawer"),
+  { 
+    ssr: false
+  }
+)
+
 export default function GymsLayout({
   children,
 }: {
@@ -17,7 +25,7 @@ export default function GymsLayout({
   return (
     <div className="flex h-screen flex-col justify-evenly">
       <aside className="fixed z-10 h-full flex-none overflow-auto">
-        <SideDrawerNav />
+      <DynamicSideDrawer /> 
       </aside>
 
       <div className="flex flex-grow  items-center justify-center ">

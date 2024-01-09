@@ -44,6 +44,7 @@ export default function SideDrawerNav() {
 
   // Base of view port, hide accordion, make side button to open a drop down/menu
   return (
+  
     screenMatches ? (
       <DrawerMenu />
     ) : (
