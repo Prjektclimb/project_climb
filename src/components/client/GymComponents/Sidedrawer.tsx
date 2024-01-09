@@ -18,7 +18,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import StateList from "./StateList";
+import StateList from "src/components/client/GymComponents/StateList";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
 
 
