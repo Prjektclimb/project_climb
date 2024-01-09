@@ -16,7 +16,7 @@ export default function GymsLayout({
 }) {
   return (
     <div className="flex h-screen flex-col justify-evenly">
-      <aside className="fixed z-10 h-full flex-none overflow-auto p-5">
+      <aside className="fixed z-10 h-full flex-none overflow-auto">
         <SideDrawerNav />
       </aside>
 

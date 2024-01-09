@@ -6,9 +6,15 @@ import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AuthProvider } from "~/useContext/authContext";
 import "~/styles/globals.css";
-import Header from "~/components/server/Header";
+import Header from "~/components/client/Header";
+import dynamic from "next/dynamic";
 
-
+const DynamicHeader = dynamic(
+  () => import("~/components/client/Header"),
+  {
+    ssr: false,
+  },
+);
 
 
 
@@ -23,7 +29,7 @@ export function LayoutProvider({
 
       
       <AuthProvider>
-        <Header /> 
+        <DynamicHeader /> 
    {children}
       </AuthProvider>
     

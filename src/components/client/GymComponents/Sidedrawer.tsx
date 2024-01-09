@@ -27,9 +27,7 @@ function DrawerMenu () {
 
 return  ( 
 
-  <Button variant={'outline'} className="rotate-90">Open Menu</Button>
-
-
+  <Button variant={'outline'} className="rotate-90 relative top-12 left-0  z-50">Open Menu</Button>
 )
 
 }

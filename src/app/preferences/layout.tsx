@@ -8,7 +8,7 @@ export default function DashboardLayout({
   }) {
 	return (
 		<div className="flex">
-		  <aside className="flex-none h-full p-5 border-r-2 border-black fixed overflow-auto z-10">
+		  <aside className="flex-none h-full border-r-2 border-black fixed overflow-visible">
 			<p className="text-3xl pb-24">Edit Your Preference</p>
 			<PreferencesNav /> 
 		  </aside>
