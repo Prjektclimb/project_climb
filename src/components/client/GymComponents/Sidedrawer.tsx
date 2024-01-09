@@ -18,7 +18,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import StateList from "src/components/client/GymComponents/StateList";
+// import StateList from "src/components/client/GymComponents/StateList";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
 
 
@@ -52,7 +52,7 @@ export default function SideDrawerNav() {
         <AccordionItem value="item-1">
           <AccordionTrigger>View State List</AccordionTrigger>
           <AccordionContent>
-            <StateList />
+            {/* <StateList /> */}
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">

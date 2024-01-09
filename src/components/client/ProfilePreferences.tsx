@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState } from "react";
 
 interface FormValues {
   firstName: string;
@@ -18,7 +18,7 @@ export function ProfilePreferences() {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const { name, value } = e.target;
     setFormData({
@@ -27,7 +27,7 @@ export function ProfilePreferences() {
     });
   };
 
-  const handleSubmit = (e: FormEvent): void => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     // You can handle form submission logic here, e.g., sending data to a server
     console.log("Form submitted:", formData);
