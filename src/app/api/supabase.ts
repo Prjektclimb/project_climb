@@ -1,5 +1,5 @@
 import { supabaseclient } from "supabaseClient";
-import { GymTypeArray, GymInfoOrUndefined, GymInfo } from "~/types/supabasetypes";
+import { GymTypeArray, GymInfoOrUndefined } from "~/types/supabasetypes";
 
 
 ////////////////////
@@ -15,6 +15,7 @@ export async function fetchGymsByColumn(columnName: string, columnValue: string)
 		throw error;
 	  }
   
+	
 	  return data;
 	} catch (error) {
 	  console.error("Error fetching state gym data:", error);

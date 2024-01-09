@@ -15,10 +15,6 @@ function formatSlug(slug: string): string {
   }  
 
 
-
-
-
-
 export default function statePage({ params }: { params: { slug: string } }) {
 
 

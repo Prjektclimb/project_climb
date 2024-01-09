@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchGymsByColumn } from "~/app/api/supabase";
 import { GymTypeArray } from "~/types/supabasetypes";
 import { useParams } from "next/navigation";

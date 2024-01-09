@@ -18,14 +18,19 @@ export default function Updatepassword() {
     confirmPassword: "",
   });
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
 	const {password, confirmPassword} = formData
 
 	if (password !== confirmPassword) return console.log('passwords do not match')
 
-	if (auth) {await auth.updatePassword(password)}
+  try {
+    if (auth) {await auth.updatePassword(password)}
+    
+  } catch (error) {
+    
+  }
 
   } 
 

@@ -1,33 +1,38 @@
-'use client'
+"use client";
 
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
-interface formType { 
-  email: string, 
-  password: string
+interface formType {
+  email: string;
+  password: string;
 }
 
 export function Login() {
-  const auth = useContext(AuthContext)
+  const auth = useContext(AuthContext);
 
   const [formData, setFormData] = useState<formType>({
     email: "",
     password: "",
   });
 
-
-
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
-    const {email, password} = formData
+    const { email, password } = formData;
 
-    if (!email || !password) return console.log("Need Email or Password input")
-    console.log('Login Attempt')
-    if (auth) {await auth.login(email, password); }
-    
+    if (!email || !password) return console.log("Need Email or Password input");
+    console.log("Login Attempt");
+    if (auth) {
+      try {
+        await auth.login(email, password);
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    }
   };
 
   return (
@@ -48,9 +53,9 @@ export function Login() {
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={(e) => { 
-                  setFormData({...formData, email: e.target.value})
-                }} 
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -66,13 +71,13 @@ export function Login() {
                 id="password"
                 name="password"
                 value={formData.password}
-                onChange={(e) => { 
-                  setFormData({...formData, password: e.target.value})
-                }} 
+                onChange={(e) => {
+                  setFormData({ ...formData, password: e.target.value });
+                }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
-           
+
             <Button
               type="submit"
               className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
@@ -82,10 +87,10 @@ export function Login() {
             <div className="mt-5">
               <p>Do not Have an account?</p>
               <Button variant={"outline"}>
-                <Link href='signup'>Sign Up</Link>
+                <Link href="signup">Sign Up</Link>
               </Button>
               <Button>
-                <Link href='resetpassword'>Reset Password</Link>
+                <Link href="resetpassword">Reset Password</Link>
               </Button>
             </div>
           </form>
@@ -94,4 +99,3 @@ export function Login() {
     </>
   );
 }
-

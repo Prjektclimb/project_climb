@@ -20,13 +20,18 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault()
 
     const { email, password, confirmPassword } = formData;
     if (password != confirmPassword)
-      return console.log("Password does not match");
-    if (auth) {  await auth.signUp(email, password)};
+      return console.log("Password does not match"); 
+    try {
+      if (auth) {  await auth.signUp(email, password)};
+      
+    } catch (error) {
+      console.error('Error With Sign up', error)
+    }
   } 
   return (
     <>

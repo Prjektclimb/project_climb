@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState, useContext } from "react";
 import Link from "next/link";
@@ -7,41 +7,39 @@ import { AuthContext } from "~/useContext/authContext";
 
 
 
-export  function Resetpassword() {
+export function Resetpassword() {
   const auth = useContext(AuthContext);
   const [formData, setFormData] = useState({
-  email: ""
+    email: "",
   });
 
-  const handleSubmit = async(e:any) => { 
-    e.preventDefault()
-	const {email} = formData
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLElement>,
+  ) => {
+    e.preventDefault();
+    const { email } = formData;
     try {
-		if (auth) await auth.passwordReset(email)
+      if (auth) await auth.passwordReset(email)
     } catch (error) {
-      console.log('Error Sending Password Reset', error)
+      console.error("Error Sending Password Reset", error);
     }
-  }
-
-
+  };
 
   return (
     <>
-      <div className="flex justify-center items-center  h-screen">
+      <div className="flex h-screen items-center  justify-center">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Send pasword reset</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-         
-            </div>
+            <div className="mb-4"></div>
             <div className="mb-4">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-            Email
+                Email
               </label>
-			  <input
+              <input
                 type="email"
                 id="email"
                 name="email"
@@ -72,6 +70,4 @@ export  function Resetpassword() {
       </div>
     </>
   );
-} 
-
-
+}
