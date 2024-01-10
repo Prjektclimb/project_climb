@@ -2,7 +2,7 @@
 
 import {  useContext} from "react";
 import { AuthContext } from "~/useContext/authContext";
-import { Button } from "@/components/ui/button";
+import { Button } from "~/@/components/ui/button";
 // import { sessionType } from "~/types/authTypes";
 import Link from "next/link";
 

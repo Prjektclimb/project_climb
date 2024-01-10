@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "~/@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
 interface formType {

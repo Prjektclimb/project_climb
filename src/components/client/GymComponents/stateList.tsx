@@ -1,7 +1,7 @@
 "use client";
 
 import { states } from "~/utils/data/states";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "~/@/components/ui/scroll-area";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 

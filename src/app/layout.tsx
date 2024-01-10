@@ -1,6 +1,6 @@
 
 import { LayoutProvider } from "~/useContext/layoutContext";
-
+import { cn } from "~/lib/utils";
 
 
 export const metadata = {
@@ -16,8 +16,11 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" data-theme="lemonade">
-      <body>
+    <html lang="en"  >
+      <body  className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+        )}
+      >
       <LayoutProvider>{children}</LayoutProvider>
       </body>
     </html>

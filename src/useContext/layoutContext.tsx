@@ -5,9 +5,8 @@ import { SupabaseClient, createClientComponentClient } from "@supabase/auth-help
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AuthProvider } from "~/useContext/authContext";
-import "~/styles/globals.css";
 import dynamic from "next/dynamic";
-
+import "~/app/globals.css";
 const DynamicHeader = dynamic(
   () => import("~/components/client/Header"),
   {

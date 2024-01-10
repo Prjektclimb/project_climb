@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
   AccordionItem,
-} from "@/components/ui/accordion";
+} from "~/@/components/ui/accordion";
 import {
   Drawer,
   DrawerClose,
@@ -16,8 +16,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+} from "~/@/components/ui/drawer";
+import { Button } from "~/@/components/ui/button";
 // import StateList from "src/components/client/GymComponents/StateList";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
 
@@ -27,7 +27,8 @@ function DrawerMenu () {
 
 return  ( 
 
-  <Button variant={'outline'} className="rotate-90 relative top-12 left-0  z-50">Open Menu</Button>
+  <Button variant={'outline'} className=" rotate-90 relative top-12 left-0  z-50">Open Menu</Button>
+
 )
 
 }

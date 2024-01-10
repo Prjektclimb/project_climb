@@ -9,8 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "~/@/components/ui/dropdown-menu";
+import { Button } from "~/@/components/ui/button";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
 
 function DropDownMenuSmall() {
@@ -19,13 +19,13 @@ function DropDownMenuSmall() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"outline"}>Menu</Button>
+        <Button variant={"secondary"}>Menu</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Button onClick={() => router.push("/")}>Home</Button>
+            <Button variant='link' onClick={() => router.push("/")}>Home</Button>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Button onClick={() => router.push("/gyms")}>Gyms</Button>
@@ -58,19 +58,19 @@ export default function Header() {
           <DropDownMenuSmall />
         ) : (
           <>
-            <Button type="button" onClick={() => router.push("/")}>
+            <Button variant="link"  onClick={() => router.push("/")}>
               Home
             </Button>
 
-            <Button type="button" onClick={() => router.push("/gyms")}>
-              About
+            <Button variant={'destructive'} onClick={() => router.push("/gyms")}>
+              Gyms
             </Button>
 
-            <Button type="button" onClick={() => router.push("/contact")}>
+            <Button variant={"outline"} onClick={() => router.push("/contact")}>
               contact
             </Button>
 
-            <Button type="button"  onClick={() => router.push("/preference")}>
+            <Button variant={"secondary"}  onClick={() => router.push("/preference")}>
               Preference
             </Button>
           </>
