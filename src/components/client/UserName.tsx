@@ -19,11 +19,11 @@ const auth = useContext(AuthContext)
       {auth?.user != null ? (
         <>
         <p>Hello</p>
-        <Button onClick={() => auth?.signOut()}>Sign out</Button>
+        <Button variant='secondary' onClick={() => auth?.signOut()}>Sign out</Button>
         </>
       ) : (
-        <Button>
-          <Link href="/auth/login">Signin</Link>
+        <Button variant='link'>
+          <Link href="/auth/login">Log In</Link>
         </Button>
       )}
     </>

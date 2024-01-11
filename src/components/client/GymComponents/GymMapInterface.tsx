@@ -7,6 +7,17 @@ import { useLocationMarker } from "~/functions&hooks/hooks/locationMarker";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { Button } from "~/@/components/ui/button";
 import { GeoLayerOptionProps } from "~/types/leaftlet_types";
+import {  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger, } from "@radix-ui/react-dropdown-menu";
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -34,13 +45,25 @@ const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
   }, [map]);
 
   return (
-    <div className="dropdown dropdown-right dropdown-end">
-    <div tabIndex={0} role="button" className="btn m-1">Menu</div>
-    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-      <li onClick={onStateLayer}><a>{layerButtonLabel}</a></li>
-      <li onClick={onResetView}><a>Reset View</a></li>
-    </ul>
-  </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='default'> Options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Map Options</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup> 
+        <DropdownMenuItem>
+          <Button variant='secondary' onClick={onResetView}>Reset View</Button>
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator>
+        <DropdownMenuItem>
+          <Button onClick={onStateLayer}>{layerButtonLabel}</Button>
+        </DropdownMenuItem>
+      </DropdownMenuSeparator>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
@@ -124,7 +147,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
           <Button variant='outline' onClick={() => locationMarker}>
             Find my Location
           </Button>
-          {/* <ExtraOption map={map} geo={geo}/> */}
+          <ExtraOption map={map} geo={geo}/>
         </div>
       </div>
     </div>
