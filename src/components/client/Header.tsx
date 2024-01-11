@@ -28,13 +28,13 @@ function DropDownMenuSmall() {
             <Button variant='link' onClick={() => router.push("/")}>Home</Button>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Button onClick={() => router.push("/gyms")}>Gyms</Button>
+            <Button variant="link"  onClick={() => router.push("/gyms")}>Gyms</Button>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Button onClick={() => router.push("/contact")}>contact</Button>
+            <Button  variant="link"  onClick={() => router.push("/contact")}>contact</Button>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Button onClick={() => router.push("/preference")}>
+            <Button variant="link"  onClick={() => router.push("/preference")}>
               Preference
             </Button>
           </DropdownMenuItem>
@@ -62,15 +62,15 @@ export default function Header() {
               Home
             </Button>
 
-            <Button variant={'destructive'} onClick={() => router.push("/gyms")}>
+            <Button variant="link"  onClick={() => router.push("/gyms")}>
               Gyms
             </Button>
 
-            <Button variant={"outline"} onClick={() => router.push("/contact")}>
-              contact
+            <Button variant="link"  onClick={() => router.push("/contact")}>
+              Contact
             </Button>
 
-            <Button variant={"secondary"}  onClick={() => router.push("/preference")}>
+            <Button variant="link"   onClick={() => router.push("/preference")}>
               Preference
             </Button>
           </>
