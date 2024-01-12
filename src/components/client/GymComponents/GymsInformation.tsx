@@ -3,7 +3,12 @@
 import { FetchGymsInfoByName } from "~/app/api/supabase";
 import { useEffect, useState } from "react";
 import { GymInfoOrUndefined } from "~/types/supabasetypes";
-
+import {Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle, } from "~/@/components/ui/card";
 
 
 export default function GymsInformation({GYM_NAME}: {GYM_NAME: string }) {
@@ -19,10 +24,15 @@ useEffect(() => {
 
 
   return (
-	<div className="flex flex-col  rounded-md border p-4 pb-24">
-  <p>info {GymInfo?.gym}</p>
-  <p>{GymInfo?.phone_number}</p>
-</div>
+<Card>
+	<CardHeader>
+		<CardTitle>{GymInfo?.gym}</CardTitle>
+	</CardHeader>
+	<CardContent>
+		{GymInfo?.phone_number ? <p>Phone: {GymInfo?.phone_number}</p> : null } 
+	</CardContent>
+</Card>
+	
 
   )
 }
