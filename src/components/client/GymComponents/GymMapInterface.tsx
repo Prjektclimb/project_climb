@@ -116,7 +116,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
     .slice(0, 1);
 
   return (
-    <div className="flex w-6/12 flex-col p-10 ">
+    <div className="flex flex-col p-10 ">
       <div className="flex h-12 items-center justify-between">
         <div className="flex space-x-2">
           <div className="flex flex-col justify-center">

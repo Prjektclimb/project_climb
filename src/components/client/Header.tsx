@@ -50,7 +50,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <header className="z-10 flex w-screen justify-around bg-background fixed">
+    <header className="z-10 flex w-screen justify-around bg-background">
       <p className="font-bold">LOGO</p>
       <UserName />
       <nav className="flex flex-row justify-around">
