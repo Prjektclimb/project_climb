@@ -90,12 +90,14 @@ export default function GymMap({}) {
     
   };
 
+  // write a hook that changes the height and width depending on sceern size
+
   const displayMap = useMemo(
     () => (
       <MapContainer
         center={center}
         zoom={DEFAULT_ZOOM_LEVEL}
-        style={{ height: "90%", width: "100%", border: "2px solid gray", zIndex: 1 }}
+        style={{ height: "100%", minHeight: "500px", width: "500px", border: "2px solid gray", zIndex: 0, }}
         ref={mapRef}
       >
         <TileLayer
@@ -110,7 +112,7 @@ export default function GymMap({}) {
             //@ts-ignore
             onEachFeature={onEachFeature}
             style={DEFAULT_LAYER_STYLE}
-            
+
           >
             <Tooltip offset={[0, 20]} opacity={1}>
               {stateName}
@@ -123,9 +125,9 @@ export default function GymMap({}) {
   );
 
   return (
-    <div>
+    <div className="">
       <GymMapInterface map={mapRef.current as L.Map} geo={layerRef.current as L.GeoJSON} />
       {displayMap}
-    </div>
+      </div>
   );
 }

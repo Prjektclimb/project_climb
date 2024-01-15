@@ -49,17 +49,17 @@ const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
       <DropdownMenuTrigger asChild>
         <Button variant='default'> Options</Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="relative z-50 bg-background w-full px-2 py-6 border m-2 border-black">
         <DropdownMenuLabel>Map Options</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup> 
         <DropdownMenuItem>
-          <Button variant='secondary' onClick={onResetView}>Reset View</Button>
+          <Button variant='outline' onClick={onResetView}>Reset View</Button>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator>
         <DropdownMenuItem>
-          <Button onClick={onStateLayer}>{layerButtonLabel}</Button>
+          <Button  variant='default' onClick={onStateLayer}>{layerButtonLabel}</Button>
         </DropdownMenuItem>
       </DropdownMenuSeparator>
       </DropdownMenuContent>
@@ -116,10 +116,10 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
     .slice(0, 1);
 
   return (
-    <div className="flex flex-col p-10 ">
-      <div className="flex h-12 items-center justify-between">
-        <div className="flex space-x-2">
-          <div className="flex flex-col justify-center">
+    
+      
+        <div className="flex lg:flex-row flex-col w-full space-x-2 m-2">
+          <div className="flex flex-col">
             {/* Input for entering a state */}
             <input
               id="stateInput"
@@ -149,7 +149,7 @@ export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: 
           </Button>
           <ExtraOption map={map} geo={geo}/>
         </div>
-      </div>
-    </div>
+
+
   );
 }

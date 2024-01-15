@@ -22,8 +22,8 @@ export default function GymsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col justify-evenly">
-      <aside className="lg:fixed z-10 lg:h-full">
+    <div className="flex flex-col justify-evenly ">
+      <aside className=" lg:h-full lg:fixed z-50">
       <DynamicSideDrawer /> 
       </aside>
 
