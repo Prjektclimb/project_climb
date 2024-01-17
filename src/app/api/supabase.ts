@@ -29,7 +29,7 @@ export async function FetchGymsInfoByName(GymName: string): Promise<GymInfoOrUnd
 try {
 	const { data, error } = await supabaseclient
 	.from("Gym")
-	.select("gym, id, phone_number" )
+	.select("gym, id, phone_number, website, state, street_address, city, zip_code" )
 	.eq("gym", GymName);
 
   if (error) {

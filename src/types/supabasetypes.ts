@@ -32,6 +32,11 @@ export interface GymInfo {
 	gym?: string;
 	id?: number;
 	phone_number?: string;
+	website?: string;
+	state?: string, 
+	street_address?: string,
+	city?: string,
+	zip_code?: string,
 }
 
 export type GymInfoOrUndefined = GymInfo | undefined;

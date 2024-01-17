@@ -53,11 +53,10 @@ export default function GymsByState() {
 
   return (
 
-        <div className="flex flex-col lg:flex-row shadow-md">
+        <div className="flex flex-col lg:flex-row lg:space-x-2 shadow-md">
            <Card>
-             <CardHeader >{formatSlug(params?.slug)}</CardHeader>
-             <CardDescription className="text-xs justify-center flex">Click on a Gym to see more information</CardDescription>
-             <Separator className="my-4"/> 
+             <CardDescription className="p-4 text-xs justify-center flex">Click on a Gym to see more information</CardDescription>
+             <Separator className="my-2"/> 
              <CardContent>
                 <ScrollArea>
                 <ul>
