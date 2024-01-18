@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   GeoJSON,
   LayerGroup,
   MapContainer,
   TileLayer,
   Tooltip,
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
@@ -16,6 +17,26 @@ import { useRouter } from "next/navigation";
 import { formatState } from "~/functions&hooks/general_functions";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { PathOptions } from "leaflet";
+import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+
+const SearchField = () => {
+  // @ts-ignore
+  const searchControl = new GeoSearchControl({
+    provider: new OpenStreetMapProvider(), 
+    autoClose: true,
+    className:"bg-white"
+     
+  });
+
+  const map = useMap();
+  //@ts-ignore
+  useEffect(() => {
+    map.addControl(searchControl);
+    return () => map.removeControl(searchControl);
+  }, []);
+
+  return null;
+};
 
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
@@ -25,8 +46,7 @@ const DEFAULT_LAYER_STYLE: PathOptions = {
   weight: 2,
   color: "black",
   dashArray: "1",
-  fillOpacity: .1, 
- 
+  fillOpacity: 0.1,
 };
 
 export default function GymMap({}) {
@@ -36,7 +56,7 @@ export default function GymMap({}) {
   const layerRef = useRef<L.GeoJSON | null>(null);
 
   //ROUTER
-  const router = useRouter()
+  const router = useRouter();
 
   const onEachFeature = (
     feature: { properties: { name: string }; geometry: { coordinates: any } },
@@ -86,20 +106,24 @@ export default function GymMap({}) {
         layer.setStyle(DEFAULT_LAYER_STYLE);
       },
     });
-
-    
   };
 
-  // write a hook that changes the height and width depending on sceern size
 
   const displayMap = useMemo(
     () => (
       <MapContainer
-        center={center}
-        zoom={DEFAULT_ZOOM_LEVEL}
-        style={{ height: "100%", minHeight: "500px", width: "500px", border: "2px solid gray", zIndex: 0, }}
-        ref={mapRef}
+      center={center}
+      zoom={DEFAULT_ZOOM_LEVEL}
+      style={{
+        height: "100%",
+        minHeight: "500px",
+        width: "500px",
+        border: "2px solid gray",
+        zIndex: 0,
+      }}
+      ref={mapRef}
       >
+      <SearchField />
         <TileLayer
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
@@ -112,7 +136,6 @@ export default function GymMap({}) {
             //@ts-ignore
             onEachFeature={onEachFeature}
             style={DEFAULT_LAYER_STYLE}
-
           >
             <Tooltip offset={[0, 20]} opacity={1}>
               {stateName}
@@ -126,8 +149,11 @@ export default function GymMap({}) {
 
   return (
     <div className="">
-      <GymMapInterface map={mapRef.current as L.Map} geo={layerRef.current as L.GeoJSON} />
+      <GymMapInterface
+        map={mapRef.current as L.Map}
+        geo={layerRef.current as L.GeoJSON}
+      />
       {displayMap}
-      </div>
+    </div>
   );
 }
