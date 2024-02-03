@@ -4,10 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   GeoJSON,
   LayerGroup,
+  LayersControl,
   MapContainer,
   TileLayer,
   Tooltip,
   useMap,
+  useMapEvents
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
@@ -18,13 +20,17 @@ import { formatState } from "~/functions&hooks/general_functions";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { PathOptions } from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import { useLocationMarker } from "~/functions&hooks/hooks/useLocationMarker";
 
+
+
+// Leaflet-GEOSEARCH --------
 const SearchField = () => {
   // @ts-ignore
   const searchControl = new GeoSearchControl({
     provider: new OpenStreetMapProvider(), 
     autoClose: true,
-    className:"bg-white"
+    noFoundMessage: 'Sorry, that address could not be found.',
      
   });
 
@@ -38,6 +44,8 @@ const SearchField = () => {
   return null;
 };
 
+
+// --------------
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
 const DEFAULT_ZOOM_LEVEL = 3.3;
 
@@ -117,7 +125,8 @@ export default function GymMap({}) {
       style={{
         height: "100%",
         minHeight: "500px",
-        width: "500px",
+        width: "100%",
+        margin: 5, 
         border: "2px solid gray",
         zIndex: 0,
       }}
@@ -148,12 +157,12 @@ export default function GymMap({}) {
   );
 
   return (
-    <div className="">
+    <div className="relative w-3/4 lg:w-full">
+      {displayMap}
       <GymMapInterface
         map={mapRef.current as L.Map}
         geo={layerRef.current as L.GeoJSON}
       />
-      {displayMap}
     </div>
   );
 }

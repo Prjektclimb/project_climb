@@ -1,5 +1,5 @@
 import { supabaseclient } from "supabaseClient";
-import { GymTypeArray, GymInfoOrUndefined } from "~/types/supabasetypes";
+import { GymTypeArray, GymInfoOrUndefined, AllGymInfoFetchOrUndefine } from "~/types/supabasetypes";
 
 
 ////////////////////
@@ -50,3 +50,23 @@ try {
 
 
   ////////////////////
+
+
+
+  export async function FetchAllGyms() {
+
+	try { 
+		const {data, error} = await supabaseclient.from("Gym").select();
+
+		if (error) { 
+			throw Error
+		}
+		if (data.length > 0 && data) { 
+			return data; 
+		}
+	}
+	catch (error) { 
+		console.log("Error Fetching information for all gyms", error)
+	}
+	
+  }

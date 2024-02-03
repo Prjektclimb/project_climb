@@ -20,6 +20,7 @@ import {
 import { Button } from "~/@/components/ui/button";
 import StateList from "src/components/client/GymComponents/StateList";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
+import GymsCompleteList from "./GymsCompleteList";
 
 
 
@@ -53,7 +54,7 @@ function AccordionList () {
   <AccordionItem value="item-2">
     <AccordionTrigger>Additional Items TEST</AccordionTrigger>
     <AccordionContent>
-      <p>Nothing to note</p>
+<GymsCompleteList /> 
     </AccordionContent>
   </AccordionItem>
 </Accordion>

@@ -44,6 +44,7 @@ const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
   }, [map]);
 
   return (
+    <div className="">
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='default'> Options</Button>
@@ -63,86 +64,23 @@ const ExtraOption: React.FC<GeoLayerOptionProps> = ({ map, geo }) => {
       </DropdownMenuSeparator>
       </DropdownMenuContent>
     </DropdownMenu>
+
+    </div>
   );
 };
 
 
 // GymMapInterface component for the main functionality
 export default function GymMapInterface({ map, geo }: { map: L.Map | null, geo: L.GeoJSON}) {
-  // State for the input value
-  const [inputValue, setInputValue] = useState<string>("");
-  const [stateOption, setStateOption] = useState<string>("");
+  
 
   // Hook for handling location marker
   const locationMarker = useLocationMarker({ map });
-  const router = useRouter();
-
-  // Handler for input change
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value.toLowerCase());
-  };
-
-  const handleKeyDown = (event: any) => {
-    const stateCorrdinatesMap = stateCoordinates[stateOption];
-
-    const firstMatchingState = matchingStates[0];
-    if (firstMatchingState) {
-      setStateOption(firstMatchingState);
-    }
-
-    if (event.key === "Enter") {
-      if (firstMatchingState) {
-        setInputValue(stateOption);
-      }
-      // Fly to State on ENTER
-      if (stateCorrdinatesMap) {
-        router.push(`http://localhost:3000/gyms/${stateOption}`);
-        map?.flyTo([stateCorrdinatesMap?.lat, stateCorrdinatesMap.lng], 5);
-      } else {
-        console.error(`Coordinates not found for state: ${stateOption}`);
-      }
-    }
-  };
-
-  // Filtering matching states based on the input value
-  const matchingStates = states
-    .filter((state) => state.toLowerCase().startsWith(inputValue))
-    .sort(
-      (a, b) =>
-        Math.abs(a.localeCompare(inputValue)) -
-        Math.abs(b.localeCompare(inputValue)),
-    )
-    .slice(0, 1);
-
+ 
   return (
     
       
-        <div className="flex lg:flex-row flex-col w-full space-x-2 m-2">
-          <div className="flex flex-col">
-            {/* Input for entering a state */}
-            <input
-              id="stateInput"
-              value={inputValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Enter a State"
-              className="border-gray z-0 border-2"
-            />
-
-            {/* Display matching states in a dropdown */}
-            {inputValue.length > 1 && (
-              <ul className="absolute z-0 w-24 rounded-md border border-gray-300 bg-white  opacity-50 shadow-lg">
-                {matchingStates.map((state, index) => (
-                  <li key={index}>{state}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Search button */}
-          <Button variant='outline'>Search</Button>
-
-          {/* Button to trigger the location marker */}
+        <div className="relative flex lg:flex-row flex-col justify-center w-full space-x-2 m-2">
           <Button variant='outline' onClick={() => locationMarker}>
             Find my Location
           </Button>
