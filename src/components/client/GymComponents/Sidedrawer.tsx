@@ -52,7 +52,7 @@ function AccordionList () {
     </AccordionContent>
   </AccordionItem>
   <AccordionItem value="item-2">
-    <AccordionTrigger>Additional Items TEST</AccordionTrigger>
+    <AccordionTrigger>View all Gyms</AccordionTrigger>
     <AccordionContent>
 <GymsCompleteList /> 
     </AccordionContent>

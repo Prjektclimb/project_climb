@@ -157,7 +157,7 @@ export default function GymMap({}) {
   );
 
   return (
-    <div className="relative w-3/4 lg:w-full">
+    <div className="">
       {displayMap}
       <GymMapInterface
         map={mapRef.current as L.Map}

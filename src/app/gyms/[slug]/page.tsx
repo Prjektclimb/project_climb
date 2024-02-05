@@ -3,8 +3,6 @@
 import GymsByState from "~/components/client/GymComponents/GymsByState";
 
 
-
-
 function formatSlug(slug: string): string {
     const words = slug.split("-");
     const capitalizedWords = words.map(
