@@ -19,8 +19,7 @@ export default async function GymsCompleteList() {
         setGyms(info);
       }
     };
-
-    fetchGyms();
+    fetchGyms()
   }, []);
 
   /// Need to add loading block 

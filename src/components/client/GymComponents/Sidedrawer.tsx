@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import {
   Accordion,
   AccordionTrigger,
@@ -22,56 +22,44 @@ import StateList from "src/components/client/GymComponents/StateList";
 import { useMediaQuery } from "~/functions&hooks/hooks/useMedia";
 import GymsCompleteList from "./GymsCompleteList";
 
+import Loading from "~/app/gyms/loading";
 
-
-function DrawerMenu () { 
-
-return  ( 
-<Drawer>
-  <DrawerTrigger>
-  <Button variant={'outline'}>Open Menu</Button>
-  </DrawerTrigger>
-<DrawerContent>
-<AccordionList /> 
-</DrawerContent>
-
-</Drawer>
-
-)
-
+function DrawerMenu() {
+  return (
+    <Drawer>
+      <DrawerTrigger>
+        <Button variant={"outline"}>Open Menu</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <AccordionList />
+      </DrawerContent>
+    </Drawer>
+  );
 }
 
-function AccordionList () { 
-
+function AccordionList() {
   return (
-  <Accordion type="single" collapsible className="sm:pt-10 ml-2">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>View State List</AccordionTrigger>
-    <AccordionContent>
-      <StateList />
-    </AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>View all Gyms</AccordionTrigger>
-    <AccordionContent>
-<GymsCompleteList /> 
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
-
-)}
-
-
+    <Accordion type="single" collapsible className="ml-2 sm:pt-10">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>View State List</AccordionTrigger>
+        <AccordionContent>
+          <StateList />
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>View all Gyms</AccordionTrigger>
+        <AccordionContent>
+          <Suspense fallback={<Loading />}>
+            <GymsCompleteList />
+          </Suspense>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
 
 export default function SideDrawerNav() {
+  const screenMatches = useMediaQuery("(max-width: 1023px");
 
-  const screenMatches = useMediaQuery('(max-width: 768px')
-
-  return (  
-    screenMatches ? (
-      <DrawerMenu />
-    ) : (
-    <AccordionList /> 
-    )
-  );
-    }  
+  return screenMatches ? <DrawerMenu /> : <AccordionList />;
+}
