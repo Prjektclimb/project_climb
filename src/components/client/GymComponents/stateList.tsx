@@ -18,16 +18,21 @@ function formatState(state: string): string {
 export default function StateList() {
   const pathname = usePathname();
   return (
-   <ScrollArea className="h-100%  rounded-md border mb-8  pb-24 bg-sky-50 p-4 space-x-4 shadow-md">
-  {states.map((state) => (
-    <li
-      key={state}
-      className={`list-none ${pathname === `/gyms/${state}` ? "underline text-blue-500" : ""}`}
-    >
-      <Link href={`/gyms/${state}`}>{formatState(state)}</Link>
-    </li>
-  ))}
-</ScrollArea>
-
+    <ScrollArea className="mb-8 space-x-2 rounded-md  border bg-sky-50 p-4  shadow-md">
+      <div className="p-4 lg:h-48 md:full">
+        {states.map((state) => (
+          <>
+            <div
+              key={state}
+              className={`list-none ${
+                pathname === `/gyms/${state}` ? "text-blue-500 underline" : ""
+              }`}
+            >
+              <Link href={`/gyms/${state}`}>{formatState(state)}</Link>
+            </div>
+          </>
+        ))}
+      </div>
+    </ScrollArea>
   );
 }

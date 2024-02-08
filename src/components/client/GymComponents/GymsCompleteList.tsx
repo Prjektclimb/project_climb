@@ -19,31 +19,31 @@ export default async function GymsCompleteList() {
         setGyms(info);
       }
     };
-    fetchGyms()
+    fetchGyms();
   }, []);
 
-  /// Need to add loading block 
+  /// Need to add loading block
   return (
     <>
-    <ScrollArea className="h-1/2  mb-8 space-x-4 rounded-md  border bg-sky-50 p-4 pb-24 shadow-md">
-      <div>
-    
-      {gyms ? (
-        <ul>
-          {gyms.map((gym, index) => (
-            <li key={index} className="flex flex-row justify-between">
-             <p>{gym?.gym}</p>
-             <p className="font-extralight">...{gym?.state}</p>
-           </li>
-          ))}
-        </ul>
-      ) 
-      :
-      (
-        <p>No Gym info</p>
+      <ScrollArea className="mb-8 space-x-4 rounded-md  border bg-sky-50 p-4  shadow-md">
+        <div className="p-4 lg:h-48 md:full overflow-scroll">
+
+        {gyms ? (
+          <>
+          <ul>
+            {gyms.map((gym, index) => (
+              <li key={index} className="flex flex-row justify-between">
+                <p>{gym?.gym}</p>
+                <p className="font-extralight">...{gym?.state}</p>
+              </li>
+            ))}
+          </ul>
+          </>
+        ) : (
+          <p>No Gym info</p>
         )}
         </div>
-        </ScrollArea>
+      </ScrollArea>
     </>
   );
 }

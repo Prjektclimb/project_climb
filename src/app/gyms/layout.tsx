@@ -23,14 +23,17 @@ export default function GymsLayout({
 }) {
   return (
     <div className="flex flex-col pr-4 pl-2">
-      <aside className="lg:h-full w-auto lg:mb-20 fixed z-50">
-      <DynamicSideDrawer /> 
-      </aside>
       <div className="flex flex-grow  items-center justify-center ">
         {children}
       </div>
-      <div className="lg:w-3/4 md:w-full lg:self-end">
+      <div className="flex lg:flex-row md:flex-col-reverse">
+
+      <aside className=" lg:h-24 lg:mb-20 self-start  z-50 w-auto bg-white">
+      <DynamicSideDrawer /> 
+      </aside>
+      <div className="lg:w-3/4 md:w-full lg:self-start">
         <DynamicMap />
+      </div>
       </div>
     </div>
   );

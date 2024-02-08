@@ -39,7 +39,7 @@ function DrawerMenu() {
 
 function AccordionList() {
   return (
-    <Accordion type="single" collapsible className="ml-2 sm:pt-10">
+    <Accordion type="single" collapsible className="ml-2 sm:pt-10 lg:w-72 lg:h-24">
       <AccordionItem value="item-1">
         <AccordionTrigger>View State List</AccordionTrigger>
         <AccordionContent>
