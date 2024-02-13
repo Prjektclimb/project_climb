@@ -4,16 +4,8 @@ import { states } from "~/utils/data/states";
 import { ScrollArea } from "~/@/components/ui/scroll-area";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { formatStateToUpperCase } from "~/functions&hooks/general_functions";
 
-
-function formatState(state: string): string {
-  const words = state.split("-");
-  const capitalizedWords = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1),
-  );
-  const formattedString = capitalizedWords.join(" ");
-  return formattedString;
-}
 
 export default function StateList() {
   const pathname = usePathname();
@@ -28,7 +20,7 @@ export default function StateList() {
                 pathname === `/gyms/${state}` ? "text-blue-500 underline" : ""
               }`}
             >
-              <Link href={`/gyms/${state}`}>{formatState(state)}</Link>
+              <Link href={`/gyms/${state}`}>{formatStateToUpperCase(state)}</Link>
             </div>
           </>
         ))}

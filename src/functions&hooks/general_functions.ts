@@ -1,5 +1,5 @@
 // Formats a state's Formal Name to be used as a router SLUG
-export function formatState(state: string) {
+export function formatStateToLowerCase(state: string) {
   // Convert the state name to lowercase
   const lowercaseState = state.toLowerCase();
 
@@ -9,6 +9,14 @@ export function formatState(state: string) {
   return formattedState;
 }
 
+export function formatStateToUpperCase(state: string): string {
+  const words = state.split("-");
+  const capitalizedWords = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1),
+  );
+  const formattedString = capitalizedWords.join(" ");
+  return formattedString;
+}
 
 
 export function getStateFullName(state: string | undefined): string | null | undefined{

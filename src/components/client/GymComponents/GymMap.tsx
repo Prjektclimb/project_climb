@@ -14,7 +14,7 @@ import { statesData } from "~/utils/data/us-states";
 import { DEFAULT_LAYER_TYPE, LatLngType } from "~/types/leaftlet_types";
 import GymMapInterface from "./GymMapInterface";
 import { useRouter } from "next/navigation";
-import { formatState } from "~/functions&hooks/general_functions";
+import { formatStateToLowerCase } from "~/functions&hooks/general_functions";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { PathOptions } from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
@@ -73,7 +73,7 @@ export default function GymMap({}) {
   ) => {
     const stateNameRef = feature.properties.name;
 
-    const formatStateName = formatState(stateNameRef); // For Router SLUG
+    const formatStateName = formatStateToLowerCase(stateNameRef); // For Router SLUG
 
     layer.on({
       mouseover: () => {
