@@ -4,12 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   GeoJSON,
   LayerGroup,
-  LayersControl,
   MapContainer,
   TileLayer,
   Tooltip,
   useMap,
-  useMapEvents
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
@@ -22,16 +20,13 @@ import { PathOptions } from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import { useLocationMarker } from "~/functions&hooks/hooks/useLocationMarker";
 
-
-
 // Leaflet-GEOSEARCH --------
 const SearchField = () => {
   // @ts-ignore
   const searchControl = new GeoSearchControl({
-    provider: new OpenStreetMapProvider(), 
+    provider: new OpenStreetMapProvider(),
     autoClose: true,
-    noFoundMessage: 'Sorry, that address could not be found.',
-     
+    noFoundMessage: "Sorry, that address could not be found.",
   });
 
   const map = useMap();
@@ -43,7 +38,6 @@ const SearchField = () => {
 
   return null;
 };
-
 
 // --------------
 const DEFAULT_POSITION = { lat: 37.8, lng: -96 };
@@ -116,23 +110,22 @@ export default function GymMap({}) {
     });
   };
 
-
   const displayMap = useMemo(
     () => (
       <MapContainer
-      center={center}
-      zoom={DEFAULT_ZOOM_LEVEL}
-      style={{
-        height: "100%",
-        minHeight: "500px",
-        width: "100%",
-        margin: 5, 
-        border: "2px solid gray",
-        zIndex: 0,
-      }}
-      ref={mapRef}
+        center={center}
+        zoom={DEFAULT_ZOOM_LEVEL}
+        style={{
+          height: "100%",
+          minHeight: "500px",
+          width: "100%",
+          margin: 5,
+          border: "2px solid gray",
+          zIndex: 0,
+        }}
+        ref={mapRef}
       >
-      <SearchField />
+        <SearchField />
         <TileLayer
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
@@ -157,7 +150,7 @@ export default function GymMap({}) {
   );
 
   return (
-    <div className="">
+    <div>
       {displayMap}
       <GymMapInterface
         map={mapRef.current as L.Map}

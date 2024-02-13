@@ -26,12 +26,11 @@ export default function GymsLayout({
       <div className="flex flex-grow  items-center justify-center ">
         {children}
       </div>
-      <div className="flex lg:flex-row md:flex-col-reverse">
-
+      <div className="flex lg:flex-row sm:flex-col">
       <aside className=" lg:h-24 lg:mb-20 self-start  z-50 w-auto bg-white">
       <DynamicSideDrawer /> 
       </aside>
-      <div className="lg:w-3/4 md:w-full lg:self-start">
+      <div className="lg:w-3/4 md:w-full sm:w-full">
         <DynamicMap />
       </div>
       </div>
