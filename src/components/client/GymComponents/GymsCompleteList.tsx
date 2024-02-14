@@ -4,9 +4,7 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { useEffect, useState } from "react";
 import { FetchAllGyms } from "~/app/api/supabase";
 import {
-  AllGymInfoFetch,
   AllGymInfoFetchOrUndefine,
-  GymInfoOrUndefined,
 } from "~/types/supabasetypes";
 import Link from "next/link";
 import { getStateFullName } from "~/functions&hooks/general_functions";

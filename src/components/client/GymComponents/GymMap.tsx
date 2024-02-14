@@ -11,14 +11,14 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "~/utils/data/us-states";
-import { DEFAULT_LAYER_TYPE, LatLngType } from "~/types/leaftlet_types";
+import { LatLngType } from "~/types/leaftlet_types";
 import GymMapInterface from "./GymMapInterface";
 import { useRouter } from "next/navigation";
 import { formatStateToLowerCase } from "~/functions&hooks/general_functions";
 import { stateCoordinates } from "~/utils/data/states_latlng";
 import { PathOptions } from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import { useLocationMarker } from "~/functions&hooks/hooks/useLocationMarker";
+
 
 // Leaflet-GEOSEARCH --------
 const SearchField = () => {
